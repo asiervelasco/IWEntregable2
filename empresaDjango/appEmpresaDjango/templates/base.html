@@ -8,8 +8,19 @@
     <body>
         <header>
             <h1>Aquí irá la cabezera</h1>
+            <nav>
+                <ul>
+                    </li>
+                    <li style="display: inline;">
+                        <a href="{% url 'lista_empleados' %}">Lista de empleados</a>
+                    </li>
+                </ul>
+            </nav>
         </header>
         <main>
+            <h2>{{ titulo_pagina }}</h2>
+            {% block contenido %}
+            {% endblock %}
         </main>
         <footer>
             <p>Aquí irá el footer</p>
