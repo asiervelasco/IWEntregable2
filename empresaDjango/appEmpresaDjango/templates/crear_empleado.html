@@ -2,4 +2,11 @@
 
 {% block contenido %}
 
+<form action="{% url 'crear_empleado' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_ul }}
+    <input type="submit" value="Nuevo empleado" />
+</form>
+<a href="{% url 'lista_empleados' %}">Volver a la lista</a>
+
 {% endblock %}
