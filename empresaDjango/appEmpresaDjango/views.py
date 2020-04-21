@@ -43,3 +43,38 @@ class CrearEmpleado(View):
             return redirect('lista_empleados')
         return render(request, 'crear_empleado.html', {'form': form, 'titulo_pagina': 'Crear nuevo empleado'})
 
+class TareaListView(ListView):
+    model = Tarea
+    queryset = Tarea.objects.order_by('dni')
+    template_name = "lista_tareas.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(TareaListView, self).get_context_data(**kwargs)
+        context['titulo_pagina'] = 'Listado de tareas'
+        return context
+
+class TareaDetailView(DetailView):
+    model = Tarea
+    template_name = 'tarea.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(TareaDetailView, self).get_context_data(**kwargs)
+        context['titulo_pagina'] = 'Detalles de la tarea'
+        return context
+
+class CrearTarea(View):
+    def get(self, request, *args, **kwargs):
+        form = TareaForm()
+        context = {
+            'form' :  form,
+            'titulo_pagina' : 'Crear nueva tarea'
+        }
+        return render(request, 'crear_tarea.html', context)
+
+    def post(self, request, *args, **kwargs):
+        form = TareaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_tareas')
+        return render(request, 'crear_tarea.html', {'form': form, 'titulo_pagina': 'Crear nueva tarea'})
+

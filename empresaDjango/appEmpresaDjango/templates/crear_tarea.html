@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<form action="{% url 'crear_tarea' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_ul }}
+    <input type="submit" value="Nueva tarea" />
+</form>
+<a href="{% url 'lista_tareas' %}">Volver a la lista de tareas</a>
+
+{% endblock %}

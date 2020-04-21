@@ -1,6 +1,8 @@
 from django.db import models
 import datetime
 
+estado = [('Abierta'), ('Asignada'), ('En proceso'), ('Finalizada')]
+
 class Empleado(models.Model):
     dni = models.CharField(max_length=9)
     nombre = models.CharField(max_length=50)
