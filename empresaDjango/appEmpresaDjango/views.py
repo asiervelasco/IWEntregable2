@@ -45,7 +45,7 @@ class CrearEmpleado(View):
 
 class TareaListView(ListView):
     model = Tarea
-    queryset = Tarea.objects.order_by('dni')
+    queryset = Tarea.objects.order_by('inicio')
     template_name = "lista_tareas.html"
 
     def get_context_data(self, **kwargs):
@@ -78,3 +78,37 @@ class CrearTarea(View):
             return redirect('lista_tareas')
         return render(request, 'crear_tarea.html', {'form': form, 'titulo_pagina': 'Crear nueva tarea'})
 
+class ProyectoListView(ListView):
+    model = Proyecto
+    queryset = Proyecto.objects.order_by('inicio')
+    template_name = 'lista_proyectos.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProyectoListView, self).get_context_data(**kwargs)
+        context['titulo_pagina'] = 'Listado de proyectos'
+        return context
+
+class ProyectoDetailView(DetailView):
+    model = Proyecto
+    template_name = 'proyecto.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProyectoDetailView, self).get_context_data(**kwargs)
+        context['titulo_pagina'] = 'Detalles del proyecto'
+        return context
+    
+class CrearProyecto(View):
+    def get(self, request, *args, **kwargs):
+        form = ProyectoForm()
+        context = {
+            'form' : form,
+            'titulo_pagina' : 'Crear nuevo proyecto'
+        }
+        return render(request, 'crear_proyecto.html', context)
+
+    def post(self, request, *args, **kwargs):
+        form = ProyectoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_proyectos')
+        return render(request, 'crear_proyecto.html', {'form': form, 'titulo_pagina': 'Crear nuevo proyecto'})

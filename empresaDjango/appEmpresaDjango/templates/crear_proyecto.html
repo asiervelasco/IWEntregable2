@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<form action="{% url 'crear_proyecto' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_ul }}
+    <input type="submit" value="Nuevo proyecto" />
+</form>
+<a href="{% url 'lista_proyectos' %}">Volver a la lista de proyectos</a>
+
+{% endblock %}
