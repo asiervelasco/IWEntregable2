@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1fe40bb-e392-4a50-b44c-fe038ec1332a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appEmpresaDjango/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/appEmpresaDjango/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appEmpresaDjango/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appEmpresaDjango/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/empresaDjango/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/empresaDjango/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,9 +44,21 @@
       <screen x="1366" y="-256" width="1280" height="984" />
     </state>
     <state x="1507" y="-122" key="SettingsEditor/0.0.1366.728/1366.-256.1280.984@1366.-256.1280.984" timestamp="1586892606139" />
-    <state x="1702" y="60" key="com.intellij.ide.util.TipDialog" timestamp="1586892567705">
-      <screen x="1366" y="-256" width="1280" height="984" />
+    <state x="359" y="234" key="com.intellij.ide.util.TipDialog" timestamp="1587898080792">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="359" y="234" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.-256.1280.984@0.0.1366.728" timestamp="1587635600818" />
     <state x="1702" y="60" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.-256.1280.984@1366.-256.1280.984" timestamp="1586892567705" />
+    <state x="359" y="234" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1587898080792" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/appEmpresaDjango/views.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
