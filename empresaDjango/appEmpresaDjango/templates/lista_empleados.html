@@ -12,14 +12,18 @@
         </tr>
     </thead>
     <tbody>
-        {% for empleado in lista_empleados %}
-        <tr>
-            <td>{{ empleado.dni }}</td>
-            <td>{{ empleado.nombre }}</td>
-            <td>{{ empleado.apellido }}</td>
-            <td><a href="{% url 'empleado' empleado.id %}">Leer</a></td>
-        </tr>
-        {% endfor %}
+        {% if lista_empleados %}
+            {% for empleado in lista_empleados %}
+            <tr>
+                <td>{{ empleado.dni }}</td>
+                <td>{{ empleado.nombre }}</td>
+                <td>{{ empleado.apellido }}</td>
+                <td><a href="{% url 'empleado' empleado.id %}">Leer</a></td>
+            </tr>
+            {% endfor %}
+        {% else %}
+        <p>No hay empleados en la lista.</p>
+        {% endif %}
     </tbody>
 </table>
 

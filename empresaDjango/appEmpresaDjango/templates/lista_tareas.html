@@ -12,14 +12,18 @@
         </tr>
     </thead>
     <tbody>
-        {% for tarea in lista_tareas %}
-        <tr>
-            <td>{{ tarea.nombre }}</td>
-            <td>{{ tarea.inicio }}</td>
-            <td>{{ tarea.fin }}</td>
-            <td><a href="{% url 'tarea' tarea.id %}">Leer</a></td>
-        </tr>
-        {% endfor %}
+        {% if lista_tareas %}
+            {% for tarea in lista_tareas %}
+            <tr>
+                <td>{{ tarea.nombre }}</td>
+                <td>{{ tarea.inicio }}</td>
+                <td>{{ tarea.fin }}</td>
+                <td><a href="{% url 'tarea' tarea.id %}">Leer</a></td>
+            </tr>
+            {% endfor %}
+        {% else %}
+        <p>No hay tareas en la lista.</p>
+        {% endif %}
     </tbody>
 </table>
 

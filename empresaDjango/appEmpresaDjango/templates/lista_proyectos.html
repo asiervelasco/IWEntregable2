@@ -12,14 +12,18 @@
         </tr>
     </thead>
     <tbody>
-        {% for proyecto in lista_proyectos %}
-        <tr>
-            <td>{{ proyecto.nombre }}</td>
-            <td>{{ proyecto.inicio }}</td>
-            <td>{{ proyecto.fin }}</td>
-            <td><a href="{% url 'proyecto' proyecto.id %}">Leer</a></td>
-        </tr>
-        {% endfor %}
+        {% if lista_proyectos %}
+            {% for proyecto in lista_proyectos %}
+            <tr>
+                <td>{{ proyecto.nombre }}</td>
+                <td>{{ proyecto.inicio }}</td>
+                <td>{{ proyecto.fin }}</td>
+                <td><a href="{% url 'proyecto' proyecto.id %}">Leer</a></td>
+            </tr>
+            {% endfor %}
+        {% else %}
+        <p>No hay proyectos en la lista.</p>
+        {% endif %}
     </tbody>
 </table>
 

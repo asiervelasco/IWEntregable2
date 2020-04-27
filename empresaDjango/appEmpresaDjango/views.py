@@ -10,7 +10,7 @@ def index(request):
 
 class EmpleadoListView(ListView):
     model = Empleado
-    queryset = Empleado.objects.order_by('dni')
+    queryset = Empleado.objects.order_by('id')
     template_name = "lista_empleados.html"
 
     def get_context_data(self, **kwargs):
