@@ -47,7 +47,7 @@ class CrearEmpleado(View):
 def pruebalistatarea(request):
     tareas =Tarea.objects.order_by('id')
     context = {'lista_tareas': tareas,
-               'titulo_pagina':'Listado de Tareas'}
+               'titulo_pagina':'Listado de tareas'}
     return render(request, 'lista_tareas.html', context)
 #Encargada de mostrar una tarea
 class TareaDetailView(DetailView):
