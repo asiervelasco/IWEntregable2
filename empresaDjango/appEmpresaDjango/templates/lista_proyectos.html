@@ -18,7 +18,7 @@
                 <td>{{ proyecto.nombre }}</td>
                 <td>{{ proyecto.inicio }}</td>
                 <td>{{ proyecto.fin }}</td>
-                <td><a href="{% url 'proyecto' proyecto.id %}">Leer</a></td>
+                <td><a href="{% url 'proyectoun' proyecto.id %}">Leer</a></td>
             </tr>
             {% endfor %}
         {% else %}

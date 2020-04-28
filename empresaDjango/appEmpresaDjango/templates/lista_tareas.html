@@ -18,7 +18,7 @@
                 <td>{{ tarea.nombre }}</td>
                 <td>{{ tarea.inicio }}</td>
                 <td>{{ tarea.fin }}</td>
-                <td><a href="{% url 'tarea' tarea.id %}">Leer</a></td>
+                <td><a href="{% url 'tareaun' tarea.id %}">Leer</a></td>
             </tr>
             {% endfor %}
         {% else %}
