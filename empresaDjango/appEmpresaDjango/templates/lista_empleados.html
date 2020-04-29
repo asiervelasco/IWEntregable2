@@ -18,6 +18,7 @@
             <td>{{ a.nombre }}</td>
             <td>{{ a.apellido }}</td>
             <td><a href="{% url 'empleadoun' a.id %}">Leer</a></td>
+            <td><a href="{% url 'modificar_empleado' a.id %}">Modificar</a></td>
         </tr>
     {% endfor %}
     </tbody>

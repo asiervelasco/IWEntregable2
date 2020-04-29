@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<form action="{% url 'modificar_empleado' %}" method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Editar empleado" />
+</form>
+<a href="{% url 'listaempleados' %}">Volver a la lista de empleados</a>
+
+{% endblock %}

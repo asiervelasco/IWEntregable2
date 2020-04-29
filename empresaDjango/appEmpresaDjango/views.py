@@ -40,10 +40,31 @@ class CrearEmpleado(View):
         form = EmpleadoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('lista_empleados')
+            return redirect('listaempleados')
         return render(request, 'crear_empleado.html', {'form': form, 'titulo_pagina': 'Crear nuevo empleado'})
-#Encargada de mostrar toda la lista de tareas, ordenadas por inicio
 
+#Encargado de la modificación de un empleado
+class modificarEmpleado(View):
+    def get(self, request, *args, **kwargs):
+        form = EmpleadoForm()
+        context = {
+            'form' :  form,
+            'titulo_pagina' : 'Modificar empleado'
+        }
+        return render(request, 'modificar_empleado.html', context)
+    
+    def post(self, request, empleado_id):
+        empleado = Empleado.objects.get(id=empleado_id)
+        form = EmpleadoForm(instance=empleado)
+        if request.method == "POST":
+            form = EmpleadoForm(request.POST, instance=empleado)
+            if form.is_valid():
+                empleado = form.save()
+                empleado.save()
+            return redirect('listaempleados')
+        return render(request, 'modificar_empleado.html', {'form': form})
+
+#Encargada de mostrar toda la lista de tareas, ordenadas por inicio
 def pruebalistatarea(request):
     tareas =Tarea.objects.order_by('id')
     context = {'lista_tareas': tareas,
@@ -72,7 +93,7 @@ class CrearTarea(View):
         form = TareaForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('lista_tareas')
+            return redirect('listatareas')
         return render(request, 'crear_tarea.html', {'form': form, 'titulo_pagina': 'Crear nueva tarea'})
 
 #Encargada de mostrar toda la lista de proyectos, ordenados por inicio
@@ -105,5 +126,5 @@ class CrearProyecto(View):
         form = ProyectoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('lista_proyectos')
+            return redirect('listaproyectos')
         return render(request, 'crear_proyecto.html', {'form': form, 'titulo_pagina': 'Crear nuevo proyecto'})
