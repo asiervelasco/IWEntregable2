@@ -2,29 +2,37 @@
 
 {% block contenido %}
 
-<table>
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Fecha inicio</th>
-            <th>Fecha fin</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% if lista_proyectos %}
-            {% for proyecto in lista_proyectos %}
-            <tr>
-                <td>{{ proyecto.nombre }}</td>
-                <td>{{ proyecto.inicio }}</td>
-                <td>{{ proyecto.fin }}</td>
-                <td><a href="{% url 'proyectoun' proyecto.id %}">Leer</a></td>
-            </tr>
-            {% endfor %}
-        {% else %}
-        <p>No hay proyectos en la lista.</p>
-        {% endif %}
-    </tbody>
-</table>
+        <div id = "page">
+            <div id = "page_text">
+
+               Todos los proyectos activos son los siguientes.
+
+            </div>
+
+            <div id= "tabla">
+                <table class="tablapla">
+                    <tr>
+                        <th class="tittabla">PROYECTOS</th>
+                        <th class="tittabla">RESPONSABLE</th>
+                        <th class="tittabla">TAREAS PENDIENTES</th>
+                        <th class="tittabla">FECHA LÍMITE</th>
+                    </tr>
+                    {% for a in lista_proyectos %}
+                        <tr>
+                            <td class="comptab">{{ a.nombre }}</td>
+                            <td class="comptab">{{ a.empleados }}</td>
+                            <td class="comptab">{{ a.tareas }}</td>
+                            <td class="comptab">{{ a.fin }}</td>
+                            <td class="comptab">
+                                <div class="boton_borrar">
+                                    <img src="https://previews.123rf.com/images/sarahdesign/sarahdesign1404/sarahdesign140400400/27748043-eliminar-bot%C3%B3n-quitar.jpg" alt="botón de eliminar">
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+        </div>
 
 {% endblock %}

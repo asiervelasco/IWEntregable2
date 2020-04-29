@@ -1,48 +1,54 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <title>Aquí irá el título</title>
+        <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+        <title>{{titulo_pagina1}}</title>
     </head>
     <body>
-        <header>
-            <h1>Aquí irá la cabezera</h1>
-            <nav>
-                <ul>
+        <div id = "header">
+            <div class = "recuadro">
+                <div class="menu-1">
+                    <a href="">      Inicio       </a>
+                    <a href="">      Información  </a>
+                    <a href= "">     Contacto     </a>
+                </div>
+            </div>
+            <div class = "recuadro">
+                    <h1>
+                        {{titulo_pagina}}
+                    </h1>
+            </div>
+            <div id = "menu-2">
+                <ul class="nav">
+                    <li><a href="inicio.html">PROYECTOS</a>
+                    <ul>
+                        <li><a href="">NUEVO PROYECTO</a></li>
+                        <li><a href="inicio.html">GESTIONAR PROYECTOS</a></li>
+                    </ul>
                     </li>
-                    <li style="display: inline;">
-                        <a href="{% url 'listaempleados' %}">Lista de empleados</a>
+                    <li><a href="">TAREAS</a>
+                        <ul>
+                            <li><a href="">NUEVA TAREA</a></li>
+                            <li><a href="">VER TAREAS</a></li>
+                        </ul>
                     </li>
-                    <li style="display: inline;">
-                        <a href="{% url 'crear_empleado' %}">Crear empleado</a>
-                    </li>
+                    <li><a href="GestorEmpleados.html">GESTIONAR EMPLEADOS</a></li>
                 </ul>
-                <ul>
-                    <li style="display: inline;">
-                        <a href="{% url 'listatareas' %}">Lista de tareas</a>
-                    </li>
-                    <li style="display: inline;">
-                        <a href="{% url 'crear_tarea' %}">Crear tarea</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li style="display: inline;">
-                        <a href="{% url 'listaproyectos' %}">Lista de proyectos</a>
-                    </li>
-                    <li style="display: inline;">
-                        <a href="{% url 'crear_proyecto' %}">Crear proyecto</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <h2>{{ titulo_pagina }}</h2>
-            {% block contenido %}
-            {% endblock %}
-        </main>
-        <footer>
-            <p>Aquí irá el footer</p>
-        </footer>
+            </div>
+        </div>
+        {% block contenido %}   {% endblock %}
+        <div class="ayudafooter">
+                <footer>
+                    <div class="tfooter">
+                        <p >Posted by: Asier Velasco, Asís Pinedo, Miguel Orti</p>
+                        <p >Correo de contacto: <a href="mailto:someone@example.com">ejemplo@ejemplo.es</a>.</p>
+                        <p >Tlf de contacto: 66666666</p>
+                        <div class="ayudafooter" id ="iconosfooter">
+                            <a href="instagram.com/dxtmarias/?hl=es"><img alt="logo instagram" src="https://png.pngtree.com/png-clipart/20190516/original/pngtree-instagram-social-media-icon-design-template-vector-png-image_3654775.jpg" style="width:50px;height:50px;"></a>
+                            <a href="https://es-es.facebook.com/pg/dxtmarias/posts/?ref=page_internal"><img alt="logo facebook" src="https://st2.depositphotos.com/1144386/7770/v/450/depositphotos_77705004-stock-illustration-original-square-with-round-corners.jpg" style="width:50px;height:50px;"></a>
+                        </div>
+                    </div>
+                </footer>
+        </div>
     </body>
 </html>

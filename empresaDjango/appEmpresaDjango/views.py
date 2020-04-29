@@ -98,9 +98,10 @@ class CrearTarea(View):
 
 #Encargada de mostrar toda la lista de proyectos, ordenados por inicio
 def pruebalistaproyecto(request):
-    empleados =Proyecto.objects.order_by('id')
-    context = {'lista_proyectos': empleados,
-               'titulo_pagina':'Listado de proyectos'}
+    proyectos =Proyecto.objects.order_by('id')
+    context = {'lista_proyectos': proyectos,
+               'titulo_pagina':'Gestor de proyectos',
+               'titulo_pagina1':'Gestion de proyectos'}
     return render(request, 'lista_proyectos.html', context)
 
 #Encargada de mostrar un proyecto
@@ -118,7 +119,8 @@ class CrearProyecto(View):
         form = ProyectoForm()
         context = {
             'form' : form,
-            'titulo_pagina' : 'Crear nuevo proyecto'
+            'titulo_pagina' : 'Crear nuevo proyecto',
+            'titulo_pagina1': 'Proyecto'
         }
         return render(request, 'crear_proyecto.html', context)
 
