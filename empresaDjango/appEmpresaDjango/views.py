@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .models import Empleado, Tarea, Proyecto
 from .forms import EmpleadoForm, TareaForm, ProyectoForm
-from django.views.generic import  DetailView
+from django.views.generic import  DetailView, ListView, DeleteView, UpdateView
+from django.urls import reverse_lazy, reverse
 
 
 def index(request):
@@ -65,17 +66,17 @@ class TareaDetailView(DetailView):
         return context
 
 #Encargado de la eliminación de un empleado
-def eliminar_empleado(request,id):
-    empleado=get_object_or_404(Empleado, id=id)
-    if request.method =="POST":
-        empleado.delete()
-        return redirect()
-    context={
-        "object":empleado
-    }
-    context['titulo_pagina'] = 'Eliminación de empleado'
-    context['titulo_pagina1'] = 'Eliminar empleado'
-    return render(request,"eliminar_empleado.html", context)
+class EmpleadosDeleteView(DeleteView):
+    model = Empleado
+    template_name = 'eliminar_empleado.html'
+    success_url = reverse_lazy('listaempleados')
+
+
+class EmpleadosUpdateView(UpdateView):
+    model = Empleado
+    fields = '__all__'
+    template_name = 'modificar_empleado.html'
+    success_url = reverse_lazy('listaempleados')
 
 
 

@@ -3,7 +3,7 @@
 {% block contenido %}
 <div id="page">
     <div id = "page_text">
-        <form action="{% url 'crear_empleado' %}" method="post">
+        <form action="{% url 'empleadosUpdateView' empleado.id %}" method="post">
             {% csrf_token %}
             <div class="columna1">
                 <div id="formulario">
@@ -32,5 +32,4 @@
         </form>
     </div>
 </div>
-
 {% endblock %}

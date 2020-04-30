@@ -6,7 +6,8 @@ urlpatterns = [
      path('empleado/<int:pk>/', views.EmpleadoDetailView.as_view(), name='empleadoun'),
      path('empleado/creacion/', views.show_form, name='creador_empleado'),
      path('empleado/crear/', views.crearempleado, name='crear_empleado'),
-     path('empleado/<int:id>/eliminar/', views.eliminar_empleado, name='eliminar_empleado'),
+     path('empleado/actualizar/<int:pk>', views.EmpleadosUpdateView.as_view(), name='empleadosUpdateView'),
+     path('empleado/borrar/<int:pk>', views.EmpleadosDeleteView.as_view(), name='empleadosDeleteView'),
 
      path('tarea/lista/', views.pruebalistatarea, name='listatareas'),
      path('tarea/<int:pk>/', views.TareaDetailView.as_view(), name='tareaun'),

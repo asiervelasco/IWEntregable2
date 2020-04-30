@@ -27,11 +27,10 @@
                         <td class="comptab">{{ empleado.apellido }}</td>
                         <td class="comptab">{{ empleado.email }}</td>
                         <td class="comptab">{{ empleado.telefono }}</td>
-                        <td class="comptab"><a href="{% url 'listaempleados' %}">MODIFICAR</a></td>
-                        <td class="comptab"><a href="{% url 'eliminar_empleado' empleado.id %}">ELIMINAR</a></td>
+                        <td class="comptab"><a href="{% url 'empleadosUpdateView' empleado.id %}">MODIFICAR</a></td>
+                        <td class="comptab"><a href="{% url 'empleadosDeleteView' empleado.id %}">ELIMINAR</a></td>
                     </tr>
                 </table>
-                <div><center><a href="{% url 'listaempleados' %}">Volver a la lista de empleados</a></center></div>
             </div>
         </div>
 
