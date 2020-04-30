@@ -12,7 +12,7 @@
                 </div>
                 <input class="formulario_input" type="text" name="nombre"><br>
                 <div id="formulario">
-                    Descripción
+                    Descrípción
                 </div>
                 <textarea class="formulario_input" type="text" name="descripcion"></textarea><br>
                 <div id="formulario">
@@ -32,11 +32,11 @@
                 </div>
                 <input class="formulario_input" type="text" name="cliente">
                 <div id="formulario">
-                    Empleados
+                    Empleados que participan
                 </div>
                 <select id="select_empleados" name="empleados" multiple required>
                     {% for emp in listaempleados %}
-                    <option value="{{ emp.id }}"> {{ emp.nombre}}  {{emp.apellidos}}</option>
+                    <option value="{{ emp.id }}"> {{ emp.nombre}}  {{emp.apellido}}</option>
                     {% endfor %}
                 </select>
             </div>

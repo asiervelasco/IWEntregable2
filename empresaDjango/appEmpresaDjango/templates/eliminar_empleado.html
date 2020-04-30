@@ -6,7 +6,12 @@
             <div id = "page_text">
                 <form action="{% url 'empleadosDeleteView' empleado.id %}" method="post">{% csrf_token %}
                     <h3>Quieres eliminar este empleado?</h3>
-                    <div><center><p><input type="submit" value="SI" />  <a href='../'>Cancel</a></p></center></div>
+                    <div>
+                        <center>
+                            <p><input type="submit" value="SI" />  
+                            <a href="{% url 'listaempleados' %}">Cancel</a></p
+                        ></center>
+                    </div>
                 </form>
             </div>
         </div>

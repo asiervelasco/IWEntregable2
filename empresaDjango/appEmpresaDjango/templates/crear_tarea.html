@@ -8,35 +8,39 @@
             {% csrf_token %}
             <div class="columna1">
                 <div id="formulario">
-                    NOMBRE
+                    Nombre
                 </div>
                 <input class="formulario_input" type="text" name="nombre"><br>
                 <div id="formulario">
-                    DESCRIPCIÓN
+                    Descrípción
                 </div>
-                <input class="formulario_input" type="text" name="descripcion"><br>
+                <textarea class="formulario_input" type="text" name="descripcion"></textarea><br>
                 <div id="formulario">
-                    FECHA DE INICO
+                    Fecha de inicio
                 </div>
-                <input class="formulario_input" type="datetime"  name="inicio"><br>
+                <input class="formulario_input" type="date"  name="inicio"><br>
                 <div id="formulario">
-                    FECHA FIN
+                    Fecha fin
                 </div>
-                <input class="formulario_input" type="datetime" name="fin"><br>
+                <input class="formulario_input" type="date" name="fin"><br>
                 <div id="formulario">
-                    RESPONSABLE
+                    Responsable
                 </div>
-                <input class="formulario_input" type="select" name="responsable">
+                <select id="select_responsable" name="responsable" multiple required>
+                    {% for emp in listaempleados %}
+                    <option value="{{ emp.id }}"> {{ emp.nombre}}  {{ emp.apellido }}</option>
+                    {% endfor %}
+                </select>
                 <div id="formulario">
-                    NIVEL DE PRIORIDAD
+                    Nivel de prioridad
                 </div>
                 <input class="formulario_input" type="text" name="prioridad"><br>
                 <div id="formulario">
-                    ESTADO DE LA TAREA
+                    Estado de la tarea
                 </div>
                 <input class="formulario_input" type="text" name="estado"><br>
                 <div id="formulario">
-                    NOTAS ADICIONALES
+                    Notas adicionales
                 </div>
                 <input class="formulario_input" type="text" name="notas"><br>
             </div>

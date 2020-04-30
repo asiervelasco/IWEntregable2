@@ -88,8 +88,12 @@ class TareaDetailView(DetailView):
         return context
 
 #Encargada de la creacion de tareas
-def show_form1(request):
-    return render(request, 'crear_tarea.html')
+def showform_proy1(request):
+    listaempleados = Empleado.objects.order_by('id')
+    context = {'listaempleados': listaempleados}
+    context['titulo_pagina'] = 'Crear tarea'
+    context['titulo_pagina1'] = 'Crear tarea'
+    return render(request, 'crear_tarea.html', context)
 
 def creartarea(request):
     nombre = request.POST["nombre"]
@@ -109,6 +113,11 @@ def creartarea(request):
     tarea.prioridad = prioridad
     tarea.estado = estado
     tarea.notas = notas
+    tarea.save()
+    listaempleados = request.POST.getlist("responsable")
+    for id in listaempleados:
+        empleado = Empleado.objects.get(pk=id)
+        tarea.responsable.add(empleado)
     tarea.save()
     return redirect('listatareas')
 
