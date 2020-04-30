@@ -22,7 +22,6 @@ def pruebalista(request):
 class EmpleadoDetailView(DetailView):
     model = Empleado
     template_name = 'empleado.html'
-
     def get_context_data(self, **kwargs):
         context = super(EmpleadoDetailView, self).get_context_data(**kwargs)
         context['titulo_pagina'] = 'Detalles del empleado'
@@ -30,7 +29,7 @@ class EmpleadoDetailView(DetailView):
         print(context)
         return context
 
-#Encargado de la creación de un nuevo empleado
+#Las siguientes dos funciones se encargan de crear el formulario y de la creaciónd de el empleado
 def show_form(request):
     return render(request, 'crear_empleado.html')
 
@@ -41,45 +40,37 @@ def crearempleado(request):
     telefono = request.POST["telefono"]
     email = request.POST["email"]
     empleado = Empleado()
-
     empleado.dni = dni
     empleado.nombre = nombre
     empleado.apellido= apellido
     empleado.email = email
     empleado.telefono = telefono
-
     empleado.save()
-
     return redirect('listaempleados')
 
-
-#Encargado de mostrar un único empleado
-class TareaDetailView(DetailView):
-    model = Tarea
-    template_name = 'tarea.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(TareaDetailView, self).get_context_data(**kwargs)
-        context['titulo_pagina'] = 'Detalles de la tarea'
-        context['titulo_pagina1'] = 'Detalles de la tarea'
-        print(context)
-        return context
-
-#Encargado de la eliminación de un empleado
+#Encargado de la eliminación de el empleado seleccionado
 class EmpleadosDeleteView(DeleteView):
     model = Empleado
     template_name = 'eliminar_empleado.html'
     success_url = reverse_lazy('listaempleados')
 
-
+#Encargada de actualizar el empleado seleccionado
 class EmpleadosUpdateView(UpdateView):
     model = Empleado
     fields = '__all__'
     template_name = 'modificar_empleado.html'
     success_url = reverse_lazy('listaempleados')
 
-
-
+#Encargado de mostrar un único empleado
+class TareaDetailView(DetailView):
+    model = Tarea
+    template_name = 'tarea.html'
+    def get_context_data(self, **kwargs):
+        context = super(TareaDetailView, self).get_context_data(**kwargs)
+        context['titulo_pagina'] = 'Detalles de la tarea'
+        context['titulo_pagina1'] = 'Detalles de la tarea'
+        print(context)
+        return context
 #Encargada de mostrar toda la lista de tareas, ordenadas por id
 def pruebalistatarea(request):
     tareas =Tarea.objects.order_by('id')
@@ -91,7 +82,6 @@ def pruebalistatarea(request):
 class TareaDetailView(DetailView):
     model = Tarea
     template_name = 'tarea.html'
-
     def get_context_data(self, **kwargs):
         context = super(TareaDetailView, self).get_context_data(**kwargs)
         context['titulo_pagina'] = 'Detalles de la tarea'
@@ -111,7 +101,6 @@ def creartarea(request):
     estado = request.POST["estado"]
     notas = request.POST["notas"]
     tarea = Tarea()
-
     tarea.nombre = nombre
     tarea.descripcion = descripcion
     tarea.inicio = inicio
@@ -120,9 +109,7 @@ def creartarea(request):
     tarea.prioridad = prioridad
     tarea.estado = estado
     tarea.notas = notas
-
     tarea.save()
-
     return redirect('listatareas')
 
 #Encargado de la eliminación de una tarea
@@ -152,40 +139,53 @@ def pruebalistaproyecto(request):
 class ProyectoDetailView(DetailView):
     model = Proyecto
     template_name = 'proyecto.html'
-
     def get_context_data(self, **kwargs):
         context = super(ProyectoDetailView, self).get_context_data(**kwargs)
         context['titulo_pagina'] = 'Detalles del proyecto'
+        context['titulo_pagina1'] = 'Detalles del proyecto'
         return context
 
 #Encargada de la creacion de proyectos
-class CrearProyecto(View):
-    def get(self, request, *args, **kwargs):
-        form = ProyectoForm()
-        context = {
-            'form' : form,
-            'titulo_pagina' : 'Crear nuevo proyecto',
-            'titulo_pagina1': 'Proyecto'
-        }
-        return render(request, 'crear_proyecto.html', context)
+def showform_proy(request):
+    listaempleados = Empleado.objects.order_by('id')
+    context = {'listaempleados': listaempleados}
+    context['titulo_pagina'] = 'Crear proyecto'
+    context['titulo_pagina1'] = 'Crear proyecto'
+    return render(request, 'crear_proyecto.html', context)
 
-    def post(self, request, *args, **kwargs):
-        form = ProyectoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('listaproyectos')
-        return render(request, 'crear_proyecto.html', {'form': form, 'titulo_pagina': 'Crear nuevo proyecto'})
 
-#Encargado de la eliminación de un proyecto
-def eliminar_proyecto(request,id):
-    proyecto = get_object_or_404(Proyecto, id=id)
-    if request.method =="POST":
-        proyecto.delete()
-        return redirect()
-    context={
-        "object":proyecto
-    }
-    context['titulo_pagina'] = 'Eliminación de proyecto'
-    context['titulo_pagina1'] = 'Eliminar proyecto'
-    return render(request,"eliminar_proyecto.html", context)
+def crearproyecto(request):
+    nombre = request.POST["nombre"]
+    descripcion = request.POST["descripcion"]
+    inicio = request.POST["inicio"]
+    fin = request.POST["fin"]
+    presupuesto = request.POST['presupuesto']
+    cliente = request.POST['cliente']
+    proyecto = Proyecto()
+    proyecto.nombre = nombre
+    proyecto.descripcion = descripcion
+    proyecto.inicio = inicio
+    proyecto.fin = fin
+    proyecto.presupuesto = presupuesto
+    proyecto.cliente = cliente
+    proyecto.save()
+    Listaempleados = request.POST.getlist("empleados")
+    for cosa in Listaempleados:
+        empleado = Empleado.objects.get(pk=cosa)
+        proyecto.empleados.add(empleado)
+    proyecto.save()
+    return redirect('listaproyectos')
 
+class ProyectosDeleteView(DeleteView):
+    model = Proyecto
+    template_name = 'eliminar_proyecto.html'
+    success_url = reverse_lazy('listaproyectos')
+
+
+class ProyectosUpdateView(UpdateView):
+    model = Proyecto
+    fields = '__all__'
+    listaempleados = Empleado.objects.order_by('id')
+    context = {'listaempleados': listaempleados}
+    template_name = 'modificar_proyecto.html'
+    success_url = reverse_lazy('listaproyectos')

@@ -1,48 +1,37 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block contenido %}
-
-
         <div id = "page">
             <div id = "page_text">
-                <div class="columna1">
-                    <div id="formulario">
-                        ID del proyecto
-                    </div>
-                    <input class="formulario_input" type="text" value="{{ proyecto.id }}">  <br>
-                    <div id="formulario">
-                        Nombre del proyecto
-                    </div>
-                    <input class="formulario_input" type="text" value="{{ proyecto.nombre }}">  <br>
-                    <div id="formulario">
-                        Fecha de inicio
-                    </div>
-                    <input class="formulario_input" type="text" value="{{ proyecto.inicio }}">   <br>
-                    <div id="formulario">
-                        Fecha límite
-                    </div>
-                    <input class="formulario_input" type="text"value="{{ proyecto.fin }}">
+                <div id= "tabla">
+                    <table class="tablapla">
+                        <thead>
+                            <tr>
+                                <th class="tittabla">Nombre</th>
+                                <th class="tittabla">Descripcion</th>
+                                <th class="tittabla">Fecha de inicio y final</th>
+                                <th class="tittabla">Presupuesto</th>
+                                <th class="tittabla">Cliente</th>
+                                <th class="tittabla">Empleados</th>
+                                <th class="tittabla">Editar</th>
+                                <th class="tittabla">Borrar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="comptab">{{ proyecto.nombre }}</td>
+                                <td class="comptab">{{ proyecto.descripcion }}</td>
+                                <td class="comptab">{{ proyecto.inicio }}  -  {{ proyecto.fin }}</td>
+                                <td class="comptab">{{ proyecto.presupuesto }}</td>
+                                <td class="comptab">{{ proyecto.cliente }}</td>
+                                <td class="comptab">{{ proyecto.empleados }}</td>
+                                <td class="comptab"><a href="{% url 'actualizar_proyecto' proyecto.id %}">Actualizar</a> </td>
+                                <td class="comptab"><a href="{% url 'eliminar_proyecto' proyecto.id %}">Borrar</a> </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="columna2">
-
-                    <div id="formulario">
-                        Cliente
-                    </div>
-                    <input class="formulario_input" type="text"value="{{ proyecto.cliente }}">  <br>
-                    <div id="formulario">
-                        Presupuesto
-                    </div>
-                    <input class="formulario_input" type="text" value="{{ proyecto.presupuesto }}">   <br>
-                    <div id="formulario">Empleados</div>
-                    <input class="formulario_input" type="text"value="{{ proyecto.empleados }}">   <br>
-                    <textarea class="formulario_input2" name="textarea" >{{ proyecto.descripcion }}</textarea>
-                    <div id="formulario">Tareas</div>
-                    <input class="formulario_input" type="text"value="{{ proyecto.tareas }}">
-                </div>
-
             </div>
-            <div><center><a href="{% url 'listaproyectos' %}">Volver a la lista de proyectos</a></center></div>
-
-
         </div>
 {% endblock %}

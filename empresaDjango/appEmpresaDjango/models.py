@@ -13,6 +13,17 @@ class Empleado(models.Model):
     def __str__(self):
         return f'{self.id} -> {self.dni}'
 
+
+
+class Proyecto(models.Model):
+    nombre = models.CharField(max_length=150)
+    descripcion = models.CharField(max_length=1000)
+    inicio = models.DateField(default=datetime.date.today)
+    fin = models.DateField(default=datetime.date.today)
+    presupuesto = models.CharField(max_length=150)
+    cliente = models.CharField(max_length=150)
+    empleados = models.ManyToManyField(Empleado)
+
 class Tarea(models.Model):
     nombre = models.CharField(max_length=150)
     descripcion = models.CharField(max_length=1000)
@@ -22,16 +33,8 @@ class Tarea(models.Model):
     prioridad = models.CharField(max_length=150)
     estado = models.CharField(max_length=150)
     notas = models.CharField(max_length=150)
+    proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return f'{self.id} -> {self.nombre}'
-
-class Proyecto(models.Model):
-    nombre = models.CharField(max_length=150)
-    descripcion = models.CharField(max_length=1000)
-    inicio = models.DateField(default=datetime.date.today)
-    fin = models.DateField(default=datetime.date.today)
-    presupuesto = models.CharField(max_length=150)
-    cliente = models.CharField(max_length=150)
-    tareas = models.ForeignKey(Tarea, on_delete=models.CASCADE)
-    empleados = models.ManyToManyField(Empleado)

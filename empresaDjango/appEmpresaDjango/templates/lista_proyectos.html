@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block contenido %}
 
@@ -12,22 +13,17 @@
             <div id= "tabla">
                 <table class="tablapla">
                     <tr>
-                        <th class="tittabla">PROYECTOS</th>
-                        <th class="tittabla">RESPONSABLE</th>
-                        <th class="tittabla">TAREAS PENDIENTES</th>
-                        <th class="tittabla">FECHA LÍMITE</th>
+                        <th class="tittabla">Nombre</th>
+                        <th class="tittabla">Descripción</th>
+                        <th class="tittabla">Cliente</th>
+                        <th class="tittabla">Información</th>
                     </tr>
                     {% for a in lista_proyectos %}
                         <tr>
                             <td class="comptab">{{ a.nombre }}</td>
-                            <td class="comptab">{{ a.empleados }}</td>
-                            <td class="comptab">{{ a.tareas }}</td>
-                            <td class="comptab">{{ a.fin }}</td>
-                            <td class="comptab">
-                                <div class="boton_borrar">
-                                    <a href="{% url 'proyectoun' a.id %}"><img  src="https://images.vexels.com/media/users/3/143356/isolated/lists/64e14fe0195557e3f18ea3becba3169b-busqueda-de-lupa.png" alt="botón de info"></a>
-                                </div>
-                            </td>
+                            <td class="comptab">{{ a.descripcion }}</td>
+                            <td class="comptab">{{ a.cliente }}</td>
+                            <td class="comptab"><a href="{% url 'proyectoun' a.id %}">Ver</a> </td>
                         </tr>
                     {% endfor %}
                 </table>

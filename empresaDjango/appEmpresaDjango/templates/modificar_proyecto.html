@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+<div id="page">
+    <div id = "page_text">
+        <form action="{% url 'actualizar_proyecto' proyecto.id %}" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <div><center><input type="submit" value="Actualizar proyecto" /></center></div>
+            <div><center><a href="{% url 'listaproyectos' %}">Volver a la lista de proyectos</a></center></div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -17,7 +17,9 @@ urlpatterns = [
 
      path('proyecto/lista/', views.pruebalistaproyecto, name='listaproyectos'),
      path('proyecto/<int:pk>/', views.ProyectoDetailView.as_view(), name='proyectoun'),
-     path('proyecto/crear/', views.CrearProyecto.as_view(), name='crear_proyecto'),
-     path('proyecto/creacion/', views.show_form, name='creador_proyecto'),
-     path('proyecto/<int:pk>/eliminar/', views.eliminar_proyecto, name='eliminar_proyecto'),
+     path('proyecto/creacion/', views.showform_proy, name='creador_proyecto'),
+     path('proyecto/crear/', views.crearproyecto, name='crear_proyecto'),
+     path('proyecto/<int:pk>/eliminar/', views.ProyectosDeleteView.as_view(), name='eliminar_proyecto'),
+     path('proyecto/<int:pk>/actualizar/', views.ProyectosUpdateView.as_view(), name='actualizar_proyecto'),
+
 ]

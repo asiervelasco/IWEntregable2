@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block contenido %}
         <div id = "page">
             <div id = "page_text">
-                <form action="." method='POST'>{% csrf_token %}
+                <form action="{% url 'eliminar_proyecto' proyecto.id %}"method='POST'>{% csrf_token %}
                     <h3>Quieres eliminar este proyecto?</h3>
                     <div><center><p><input type="submit" value="SI" />  <a href='../'>Cancel</a></p></center></div>
                 </form>
