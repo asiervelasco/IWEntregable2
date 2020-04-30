@@ -1,30 +1,32 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
+        <div id = "page">
+            <div id = "page_text">
 
-<table>
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Fecha inicio</th>
-            <th>Fecha fin</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% if lista_tareas %}
-            {% for tarea in lista_tareas %}
-            <tr>
-                <td>{{ tarea.nombre }}</td>
-                <td>{{ tarea.inicio }}</td>
-                <td>{{ tarea.fin }}</td>
-                <td><a href="{% url 'tareaun' tarea.id %}">Leer</a></td>
-            </tr>
-            {% endfor %}
-        {% else %}
-        <p>No hay tareas en la lista.</p>
-        {% endif %}
-    </tbody>
-</table>
+               Todos las tareas actuales son los siguientes.
+
+            </div>
+
+            <div id= "tabla">
+                <table class="tablapla">
+                    <tr>
+                        <th class="tittabla">Nombre</th>
+                        <th class="tittabla">Fecha de inicio</th>
+                        <th class="tittabla">Fecha fin</th>
+                        <th class="tittabla">Acciones</th>
+                    </tr>
+                    {% for a in lista_tareas %}
+                        <tr>
+                            <td class="comptab">{{ a.nombre }}</td>
+                            <td class="comptab">{{ a.inicio }}</td>
+                            <td class="comptab">{{ a.fin }}</td>
+                            <td class="comptab"><a href="{% url 'tareaun' a.id %}">Leer</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
 
 {% endblock %}

@@ -1,46 +1,42 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
+        <div id = "page">
+            <div id = "page_text">
 
-<table>
-    <tr>
-        <td>ID</td>
-        <td>{{ tarea.id }}</td>
-    </tr>
-    <tr>
-        <td>Nombre</td>
-        <td>{{ tarea.nombre }}</td>
-    </tr>
-    <tr>
-        <td>Descripción</td>
-        <td>{{ tarea.descripcion }}</td>
-    </tr>
-    <tr>
-        <td>Fecha de inicio</td>
-        <td>{{ tarea.inicio }}</td>
-    </tr>
-    <tr>
-        <td>Fecha fin</td>
-        <td>{{ tarea.fin }}</td>
-    </tr>
-    <tr>
-        <td>Responsable</td>
-        <td>{{ tarea.responsable }}</td>
-    </tr>
-    <tr>
-        <td>Nivel de prioridad</td>
-        <td>{{ tarea.prioridad }}</td>
-    </tr>
-    <tr>
-        <td>Estado de la tarea</td>
-        <td>{{ tarea.estado }}</td>
-    </tr>
-    <tr>
-        <td>Notas adicionales por empelado</td>
-        <td>{{ tarea.notas }}</td>
-    </tr>
-</table>
+               Esta es la información de la tarea
 
-<a href="{% url 'listatareas' %}">Volver a la lista de tareas</a>
+            </div>
+
+            <div id= "tabla">
+                <table class="tablapla">
+                    <tr>
+                        <th class="tittabla">ID</th>
+                        <th class="tittabla">Nombre </th>
+                        <th class="tittabla">Descripción</th>
+                        <th class="tittabla">Fecha de inico</th>
+                        <th class="tittabla">Fecha fin</th>
+                        <th class="tittabla">Responsable</th>
+                        <th class="tittabla">Estado de la tarea</th>
+                        <th class="tittabla">Notas adicionales</th>
+                        <th class="tittabla">Modificar</th>
+                        <th class="tittabla">Eliminar</th>
+                    </tr>
+                    <tr>
+                        <td class="comptab">{{ tarea.id }}</td>
+                        <td class="comptab">{{ tarea.nombre }}</td>
+                        <td class="comptab">{{ tarea.descripcion }}</td>
+                        <td class="comptab">{{ tarea.inicio }}</td>
+                        <td class="comptab">{{ tarea.fin }}</td>
+                        <td class="comptab">{{ tarea.responsable }}</td>
+                        <td class="comptab">{{ tarea.estado }}</td>
+                        <td class="comptab">{{ tarea.notas }}</td>
+                        <td class="comptab"><a href="{% url 'listatareas' %}">MODIFICAR</a></td>
+                        <td class="comptab"><a href="{% url 'eliminar_tarea' tarea.id %}">ELIMINAR</a></td>
+                    </tr>
+                </table>
+                <div><center><a href="{% url 'listatareas' %}">Volver a la lista de tareas</a></center></div>
+            </div>
+        </div>
 
 {% endblock %}

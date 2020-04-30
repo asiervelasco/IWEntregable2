@@ -1,12 +1,48 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
-
-<form action="{% url 'crear_tarea' %}" method="post">
-    {% csrf_token %}
-    {{ form.as_ul }}
-    <input type="submit" value="Nueva tarea" />
-</form>
-<a href="{% url 'listatareas' %}">Volver a la lista de tareas</a>
+<div id="page">
+    <div id = "page_text">
+        <form action="{% url 'crear_tarea' %}" method="post">
+            {% csrf_token %}
+            <div class="columna1">
+                <div id="formulario">
+                    NOMBRE
+                </div>
+                <input class="formulario_input" type="text" name="nombre"><br>
+                <div id="formulario">
+                    DESCRIPCIÓN
+                </div>
+                <input class="formulario_input" type="text" name="descripcion"><br>
+                <div id="formulario">
+                    FECHA DE INICO
+                </div>
+                <input class="formulario_input" type="datetime"  name="inicio"><br>
+                <div id="formulario">
+                    FECHA FIN
+                </div>
+                <input class="formulario_input" type="datetime" name="fin"><br>
+                <div id="formulario">
+                    RESPONSABLE
+                </div>
+                <input class="formulario_input" type="select" name="responsable">
+                <div id="formulario">
+                    NIVEL DE PRIORIDAD
+                </div>
+                <input class="formulario_input" type="text" name="prioridad"><br>
+                <div id="formulario">
+                    ESTADO DE LA TAREA
+                </div>
+                <input class="formulario_input" type="text" name="estado"><br>
+                <div id="formulario">
+                    NOTAS ADICIONALES
+                </div>
+                <input class="formulario_input" type="text" name="notas"><br>
+            </div>
+            <div><center><input type="submit" value="Nueva tarea" /></center></div>
+            <div><center><a href="{% url 'listatareas' %}">Volver a la lista de tareas</a></center></div>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

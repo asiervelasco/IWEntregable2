@@ -8,6 +8,7 @@ from django.views.generic import  DetailView
 
 def index(request):
     return HttpResponse("Listado de departamentos")
+
 #Encargada de mostrar toda la lista de empleados, ordenados por id
 def pruebalista(request):
     empleados =Empleado.objects.order_by('id')
@@ -27,12 +28,13 @@ class EmpleadoDetailView(DetailView):
         context['titulo_pagina1'] = 'Detalles del empleado'
         print(context)
         return context
+
 #Encargado de la creación de un nuevo empleado
 def show_form(request):
     return render(request, 'crear_empleado.html')
 
 def crearempleado(request):
-    nombre=request.POST["nombre"]
+    nombre = request.POST["nombre"]
     apellido = request.POST["apellido"]
     dni = request.POST["dni"]
     telefono = request.POST["telefono"]
@@ -50,19 +52,17 @@ def crearempleado(request):
     return redirect('listaempleados')
 
 
+#Encargado de mostrar un único empleado
+class TareaDetailView(DetailView):
+    model = Tarea
+    template_name = 'tarea.html'
 
-
-
-
-
-
-
-
-
-
-
-
-
+    def get_context_data(self, **kwargs):
+        context = super(TareaDetailView, self).get_context_data(**kwargs)
+        context['titulo_pagina'] = 'Detalles de la tarea'
+        context['titulo_pagina1'] = 'Detalles de la tarea'
+        print(context)
+        return context
 
 #Encargado de la eliminación de un empleado
 def eliminar_empleado(request,id):
@@ -78,12 +78,14 @@ def eliminar_empleado(request,id):
     return render(request,"eliminar_empleado.html", context)
 
 
+
 #Encargada de mostrar toda la lista de tareas, ordenadas por id
 def pruebalistatarea(request):
     tareas =Tarea.objects.order_by('id')
     context = {'lista_tareas': tareas,
                'titulo_pagina':'Listado de tareas'}
     return render(request, 'lista_tareas.html', context)
+
 #Encargada de mostrar una tarea
 class TareaDetailView(DetailView):
     model = Tarea
@@ -93,22 +95,49 @@ class TareaDetailView(DetailView):
         context = super(TareaDetailView, self).get_context_data(**kwargs)
         context['titulo_pagina'] = 'Detalles de la tarea'
         return context
-#Encargada de la creacion de tareas
-class CrearTarea(View):
-    def get(self, request, *args, **kwargs):
-        form = TareaForm()
-        context = {
-            'form' :  form,
-            'titulo_pagina' : 'Crear nueva tarea'
-        }
-        return render(request, 'crear_tarea.html', context)
 
-    def post(self, request, *args, **kwargs):
-        form = TareaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('listatareas')
-        return render(request, 'crear_tarea.html', {'form': form, 'titulo_pagina': 'Crear nueva tarea'})
+#Encargada de la creacion de tareas
+def show_form1(request):
+    return render(request, 'crear_tarea.html')
+
+def creartarea(request):
+    nombre = request.POST["nombre"]
+    descripcion = request.POST["descripcion"]
+    inicio = request.POST["inicio"]
+    fin = request.POST["fin"]
+    responsable = request.POST["responsable"]
+    prioridad = request.POST["prioridad"]
+    estado = request.POST["estado"]
+    notas = request.POST["notas"]
+    tarea = Tarea()
+
+    tarea.nombre = nombre
+    tarea.descripcion = descripcion
+    tarea.inicio = inicio
+    tarea.fin = fin
+    tarea.responsable = responsable
+    tarea.prioridad = prioridad
+    tarea.estado = estado
+    tarea.notas = notas
+
+    tarea.save()
+
+    return redirect('listatareas')
+
+#Encargado de la eliminación de una tarea
+def eliminar_tarea(request,id):
+    tarea = get_object_or_404(Tarea, id=id)
+    if request.method =="POST":
+        tarea.delete()
+        return redirect()
+    context={
+        "object":tarea
+    }
+    context['titulo_pagina'] = 'Eliminación de tarea'
+    context['titulo_pagina1'] = 'Eliminar tarea'
+    return render(request,"eliminar_tarea.html", context)
+
+
 
 #Encargada de mostrar toda la lista de proyectos, ordenados por inicio
 def pruebalistaproyecto(request):
@@ -127,7 +156,8 @@ class ProyectoDetailView(DetailView):
         context = super(ProyectoDetailView, self).get_context_data(**kwargs)
         context['titulo_pagina'] = 'Detalles del proyecto'
         return context
-#Encargada de la creacion de tareas
+
+#Encargada de la creacion de proyectos
 class CrearProyecto(View):
     def get(self, request, *args, **kwargs):
         form = ProyectoForm()
@@ -144,3 +174,17 @@ class CrearProyecto(View):
             form.save()
             return redirect('listaproyectos')
         return render(request, 'crear_proyecto.html', {'form': form, 'titulo_pagina': 'Crear nuevo proyecto'})
+
+#Encargado de la eliminación de un proyecto
+def eliminar_proyecto(request,id):
+    proyecto = get_object_or_404(Proyecto, id=id)
+    if request.method =="POST":
+        proyecto.delete()
+        return redirect()
+    context={
+        "object":proyecto
+    }
+    context['titulo_pagina'] = 'Eliminación de proyecto'
+    context['titulo_pagina1'] = 'Eliminar proyecto'
+    return render(request,"eliminar_proyecto.html", context)
+

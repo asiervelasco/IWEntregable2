@@ -41,6 +41,8 @@ body{
 }
 #menu-2 {
     margin:0px 200px;
+    width:68.8%;
+    height: 20%;
     font-family:Arial, Helvetica, sans-serif;
 }
 
@@ -60,11 +62,10 @@ ul, ol {
 }
 
 .nav li a {
+    height: 35px;
     background-color: white;
     color:black;
     text-decoration:none;
-    width: 298px;
-    height: 40px;
     display:flex;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     border-style: solid;
@@ -78,10 +79,13 @@ ul, ol {
     background-color:#bbbbbb;
     
 }
-
+.nav li{
+    width:32.8%;
+}
 .nav li ul {
     display:none;
     position:absolute;
+    width: 68.7%;
 }
 
 .nav li:hover > ul {
@@ -99,7 +103,6 @@ ul, ol {
 #page{
     margin-left: 200px;
     margin-right: 200px;
-    margin-top: 20px;
     background-color: white;
     display: inline-block;
     width: 67.5%;
