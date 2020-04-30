@@ -34,4 +34,4 @@ class Proyecto(models.Model):
     presupuesto = models.CharField(max_length=150)
     cliente = models.CharField(max_length=150)
     tareas = models.ForeignKey(Tarea, on_delete=models.CASCADE)
-    empleados = models.ForeignKey(Empleado, on_delete=models.CASCADE)
+    empleados = models.ManyToManyField(Empleado)

@@ -1,10 +1,9 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .models import Empleado, Tarea, Proyecto
 from .forms import EmpleadoForm, TareaForm, ProyectoForm
-from django.views.generic import ListView, DetailView
-from django.shortcuts import get_object_or_404, get_list_or_404
+from django.views.generic import  DetailView
 
 
 def index(request):
@@ -13,7 +12,8 @@ def index(request):
 def pruebalista(request):
     empleados =Empleado.objects.order_by('id')
     context = {'lista_empleado': empleados,
-               'titulo_pagina':'Listado de empleados'}
+               'titulo_pagina':'Listado de empleados',
+               'titulo_pagina1':'Empleados'}
     return render(request, 'lista_empleados.html', context)
 
 #Encargado de mostrar un único empleado
@@ -24,47 +24,61 @@ class EmpleadoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(EmpleadoDetailView, self).get_context_data(**kwargs)
         context['titulo_pagina'] = 'Detalles del empleado'
+        context['titulo_pagina1'] = 'Detalles del empleado'
         print(context)
         return context
 #Encargado de la creación de un nuevo empleado
-class CrearEmpleado(View):
-    def get(self, request, *args, **kwargs):
-        form = EmpleadoForm()
-        context = {
-            'form' :  form,
-            'titulo_pagina' : 'Crear nuevo empleado'
-        }
-        return render(request, 'crear_empleado.html', context)
+def show_form(request):
+    return render(request, 'crear_empleado.html')
 
-    def post(self, request, *args, **kwargs):
-        form = EmpleadoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('listaempleados')
-        return render(request, 'crear_empleado.html', {'form': form, 'titulo_pagina': 'Crear nuevo empleado'})
+def crearempleado(request):
+    nombre=request.POST["nombre"]
+    apellido = request.POST["apellido"]
+    dni = request.POST["dni"]
+    telefono = request.POST["telefono"]
+    email = request.POST["email"]
+    empleado = Empleado()
 
-#Encargado de la modificación de un empleado
-class modificarEmpleado(View):
-    def get(self, request, *args, **kwargs):
-        form = EmpleadoForm()
-        context = {
-            'form' :  form,
-            'titulo_pagina' : 'Modificar empleado'
-        }
-        return render(request, 'modificar_empleado.html', context)
-    
-    def post(self, request, empleado_id):
-        empleado = Empleado.objects.get(id=empleado_id)
-        form = EmpleadoForm(instance=empleado)
-        if request.method == "POST":
-            form = EmpleadoForm(request.POST, instance=empleado)
-            if form.is_valid():
-                empleado = form.save()
-                empleado.save()
-            return redirect('listaempleados')
-        return render(request, 'modificar_empleado.html', {'form': form})
+    empleado.dni = dni
+    empleado.nombre = nombre
+    empleado.apellido= apellido
+    empleado.email = email
+    empleado.telefono = telefono
 
-#Encargada de mostrar toda la lista de tareas, ordenadas por inicio
+    empleado.save()
+
+    return redirect('listaempleados')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Encargado de la eliminación de un empleado
+def eliminar_empleado(request,id):
+    empleado=get_object_or_404(Empleado, id=id)
+    if request.method =="POST":
+        empleado.delete()
+        return redirect()
+    context={
+        "object":empleado
+    }
+    context['titulo_pagina'] = 'Eliminación de empleado'
+    context['titulo_pagina1'] = 'Eliminar empleado'
+    return render(request,"eliminar_empleado.html", context)
+
+
+#Encargada de mostrar toda la lista de tareas, ordenadas por id
 def pruebalistatarea(request):
     tareas =Tarea.objects.order_by('id')
     context = {'lista_tareas': tareas,

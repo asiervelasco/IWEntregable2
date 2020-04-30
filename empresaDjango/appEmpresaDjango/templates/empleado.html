@@ -1,34 +1,37 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
+        <div id = "page">
+            <div id = "page_text">
 
-<table>
-    <tr>
-        <td>ID</td>
-        <td>{{ empleado.id }}</td>
-    </tr>
-    <tr>
-        <td>DNI</td>
-        <td>{{ empleado.dni }}</td>
-    </tr>
-    <tr>
-        <td>Nombre</td>
-        <td>{{ empleado.nombre }}</td>
-    </tr>
-    <tr>
-        <td>Apellido</td>
-        <td>{{ empleado.apellido }}</td>
-    </tr>
-    <tr>
-        <td>Email</td>
-        <td>{{ empleado.email }}</td>
-    </tr>
-    <tr>
-        <td>Teléfono</td>
-        <td>{{ empleado.telefono }}</td>
-    </tr>
-</table>
+               Esta es la información de el empleado
 
-<a href="{% url 'listaempleados' %}">Volver a la lista de empleados</a>
+            </div>
+
+            <div id= "tabla">
+                <table class="tablapla">
+                    <tr>
+                        <th class="tittabla">ID</th>
+                        <th class="tittabla">DNI </th>
+                        <th class="tittabla">Nombre</th>
+                        <th class="tittabla">Apellido</th>
+                        <th class="tittabla">email</th>
+                        <th class="tittabla">tlf</th>
+                        <th class="tittabla">Modificar</th>
+                        <th class="tittabla">Eliminar</th>
+                    </tr>
+                    <tr>
+                        <td class="comptab">{{ empleado.id }}</td>
+                        <td class="comptab">{{ empleado.dni }}</td>
+                        <td class="comptab">{{ empleado.nombre }}</td>
+                        <td class="comptab">{{ empleado.apellido }}</td>
+                        <td class="comptab">{{ empleado.email }}</td>
+                        <td class="comptab">{{ empleado.telefono }}</td>
+                        <td class="comptab"><a href="{% url 'listaempleados' %}">MODIFICAR</a></td>
+                        <td class="comptab"><a href="{% url 'eliminar_empleado' empleado.id %}">ELIMINAR</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
 {% endblock %}

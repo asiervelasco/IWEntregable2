@@ -2,45 +2,47 @@
 
 {% block contenido %}
 
-<table>
-    <tr>
-        <td>ID</td>
-        <td>{{ proyecto.id }}</td>
-    </tr>
-    <tr>
-        <td>Nombre</td>
-        <td>{{ proyecto.nombre }}</td>
-    </tr>
-    <tr>
-        <td>Descripción</td>
-        <td>{{ proyecto.descripcion }}</td>
-    </tr>
-    <tr>
-        <td>Fecha de inico</td>
-        <td>{{ proyecto.inicio }}</td>
-    </tr>
-    <tr>
-        <td>Fecha fin</td>
-        <td>{{ proyecto.fin }}</td>
-    </tr>
-    <tr>
-        <td>Presupuesto</td>
-        <td>{{ proyecto.presupuesto }}</td>
-    </tr>
-    <tr>
-        <td>Cliente</td>
-        <td>{{ proyecto.cliente }}</td>
-    </tr>
-    <tr>
-        <td>Tareas a realizar</td>
-        <td>{{ proyecto.tareas }}</td>
-    </tr>
-    <tr>
-        <td>Empleados que participan</td>
-        <td>{{ proyecto.empleados }}</td>
-    </tr>
-</table>
 
-<a href="{% url 'listaproyectos' %}">Volver a la lista de proyectos</a>
+        <div id = "page">
+            <div id = "page_text">
+                <div class="columna1">
+                    <div id="formulario">
+                        ID del proyecto
+                    </div>
+                    <input class="formulario_input" type="text" value="{{ proyecto.id }}">  <br>
+                    <div id="formulario">
+                        Nombre del proyecto
+                    </div>
+                    <input class="formulario_input" type="text" value="{{ proyecto.nombre }}">  <br>
+                    <div id="formulario">
+                        Fecha de inicio
+                    </div>
+                    <input class="formulario_input" type="text" value="{{ proyecto.inicio }}">   <br>
+                    <div id="formulario">
+                        Fecha límite
+                    </div>
+                    <input class="formulario_input" type="text"value="{{ proyecto.fin }}">
+                </div>
+                <div class="columna2">
 
+                    <div id="formulario">
+                        Cliente
+                    </div>
+                    <input class="formulario_input" type="text"value="{{ proyecto.cliente }}">  <br>
+                    <div id="formulario">
+                        Presupuesto
+                    </div>
+                    <input class="formulario_input" type="text" value="{{ proyecto.presupuesto }}">   <br>
+                    <div id="formulario">Empleados</div>
+                    <input class="formulario_input" type="text"value="{{ proyecto.empleados }}">   <br>
+                    <textarea class="formulario_input2" name="textarea" >{{ proyecto.descripcion }}</textarea>
+                    <div id="formulario">Tareas</div>
+                    <input class="formulario_input" type="text"value="{{ proyecto.tareas }}">
+                </div>
+
+            </div>
+            <div><center><a href="{% url 'listaproyectos' %}">Volver a la lista de proyectos</a></center></div>
+
+
+        </div>
 {% endblock %}
