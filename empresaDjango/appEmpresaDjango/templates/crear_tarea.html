@@ -14,7 +14,7 @@
                 <div id="formulario">
                     Descrípción
                 </div>
-                <textarea class="formulario_input" type="text" name="descripcion"></textarea><br>
+                <textarea class="formulario_input" type="text" name="descripcion"  rows="4" cols="50"></textarea><br>
                 <div id="formulario">
                     Fecha de inicio
                 </div>
@@ -26,7 +26,7 @@
                 <div id="formulario">
                     Responsable
                 </div>
-                <select id="select_responsable" name="responsable" multiple required>
+                <select id="select_responsable" name="responsable" >
                     {% for a in listaempleados %}
                     <option value="{{ a.id }}"> {{ a.nombre}}  {{ a.apellido }}</option>
                     {% endfor %}
@@ -38,15 +38,20 @@
                 <div id="formulario">
                     Estado de la tarea
                 </div>
-                <input class="formulario_input" type="text" name="estado"><br>
+                <select id="select_responsable" name="estado" >
+                    <option value="Abierta">Abierta </option>
+                    <option value="Asignada">Asignada </option>
+                    <option value="En proceso">En proceso </option>
+                    <option value="Finalizada">Finalizada </option>
+                </select>
                 <div id="formulario">
                     Notas adicionales
                 </div>
-                <input class="formulario_input" type="text" name="notas"><br>
+                <textarea class="formulario_input" type="text" name="notas" rows="4" cols="50"></textarea><br>
                 <div id="formulario">
                     Proyecto
                 </div>
-                <select id="select_proyecto" name="proyecto" multiple required>
+                <select id="select_proyecto" name="proyecto" >
                     {% for a in listaproyectos %}
                     <option value="{{ a.id }}"> {{ a.nombre}}</option>
                     {% endfor %}

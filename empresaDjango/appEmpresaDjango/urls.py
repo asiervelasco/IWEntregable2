@@ -17,7 +17,7 @@ urlpatterns = [
      path('tarea/<int:pk>/actualizar/', views.TareaUpdateView.as_view(), name='actualizar_tarea'),
 
      path('proyecto/lista/', views.pruebalistaproyecto, name='listaproyectos'),
-     path('proyecto/<int:pk>/', views.ProyectoDetailView.as_view(), name='proyectoun'),
+     path('proyecto/<int:id>/', views.proyectodetalles, name='proyectoun'),
      path('proyecto/creacion/', views.showform_proy, name='creador_proyecto'),
      path('proyecto/crear/', views.crearproyecto, name='crear_proyecto'),
      path('proyecto/<int:pk>/eliminar/', views.ProyectosDeleteView.as_view(), name='eliminar_proyecto'),

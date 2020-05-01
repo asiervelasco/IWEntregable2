@@ -25,7 +25,7 @@
                                 <td class="comptab">{{ proyecto.inicio }}  -  {{ proyecto.fin }}</td>
                                 <td class="comptab">{{ proyecto.presupuesto }}</td>
                                 <td class="comptab">{{ proyecto.cliente }}</td>
-                                <td class="comptab">{{ proyecto.empleados }}</td>
+                                <td class="comptab">{{empleados}}</td>
                                 <td class="comptab"><a href="{% url 'actualizar_proyecto' proyecto.id %}">Actualizar</a> </td>
                                 <td class="comptab"><a href="{% url 'eliminar_proyecto' proyecto.id %}">Borrar</a> </td>
                             </tr>

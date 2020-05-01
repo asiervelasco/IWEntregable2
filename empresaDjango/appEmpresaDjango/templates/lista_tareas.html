@@ -13,6 +13,7 @@
                 <table class="tablapla">
                     <tr>
                         <th class="tittabla">Nombre</th>
+                        <th class="tittabla">Proyecto</th>
                         <th class="tittabla">Fecha de inicio</th>
                         <th class="tittabla">Fecha fin</th>
                         <th class="tittabla">Acciones</th>
@@ -20,6 +21,7 @@
                     {% for a in lista_tareas %}
                         <tr>
                             <td class="comptab">{{ a.nombre }}</td>
+                            <td class="comptab">{{ a.proyecto }}</td>
                             <td class="comptab">{{ a.inicio }}</td>
                             <td class="comptab">{{ a.fin }}</td>
                             <td class="comptab"><a href="{% url 'tareaun' a.id %}">Leer</a></td>

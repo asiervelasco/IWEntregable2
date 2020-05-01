@@ -26,7 +26,6 @@ class EmpleadoDetailView(DetailView):
         context = super(EmpleadoDetailView, self).get_context_data(**kwargs)
         context['titulo_pagina'] = 'Detalles del empleado'
         context['titulo_pagina1'] = 'Detalles del empleado'
-        print(context)
         return context
 
 #Las siguientes dos funciones se encargan de crear el formulario y de la creaciónd de el empleado
@@ -69,16 +68,16 @@ class TareaDetailView(DetailView):
         context = super(TareaDetailView, self).get_context_data(**kwargs)
         context['titulo_pagina'] = 'Detalles de la tarea'
         context['titulo_pagina1'] = 'Detalles de la tarea'
-        print(context)
         return context
 
 
 
 #Encargada de mostrar toda la lista de tareas, ordenadas por id
 def pruebalistatarea(request):
-    tareas =Tarea.objects.order_by('id')
+    tareas =Tarea.objects.order_by('proyecto')
     context = {'lista_tareas': tareas,
-               'titulo_pagina':'Listado de tareas'}
+               'titulo_pagina':'Listado de tareas',
+                'titulo_pagina1': 'Listado de tareas'}
     return render(request, 'lista_tareas.html', context)
 
 #Encargada de mostrar una tarea
@@ -90,7 +89,7 @@ class TareaDetailView(DetailView):
         context['titulo_pagina'] = 'Detalles de la tarea'
         return context
 
-#Encargada de la creacion de tareas
+#Encargada de la creacion de el formulario de creación de tareas
 def showform_proy1(request):
     listaempleados = Empleado.objects.order_by('id')
     listaproyectos = Proyecto.objects.order_by('id')
@@ -100,60 +99,39 @@ def showform_proy1(request):
     context['titulo_pagina'] = 'Crear tarea'
     context['titulo_pagina1'] = 'Crear tarea'
     return render(request, 'crear_tarea.html', context)
-
+#Encargada de la creacion de las tareas
 def creartarea(request):
     nombre = request.POST["nombre"]
     descripcion = request.POST["descripcion"]
     inicio = request.POST["inicio"]
     fin = request.POST["fin"]
-    responsable = request.POST["responsable"]
     prioridad = request.POST["prioridad"]
     estado = request.POST["estado"]
     notas = request.POST["notas"]
-    proyecto = request.POST["proyecto"]
-    
     tarea = Tarea()
-    
     tarea.nombre = nombre
     tarea.descripcion = descripcion
     tarea.inicio = inicio
     tarea.fin = fin
-    tarea.responsable = responsable
     tarea.prioridad = prioridad
     tarea.estado = estado
     tarea.notas = notas
-    tarea.proyecto = proyecto
-    tarea.save()
-    listaempleados = request.POST.getlist("responsable")
+    listaempleados = request.POST["responsable"]
     for id in listaempleados:
         empleado = Empleado.objects.get(pk=id)
-        tarea.responsable.add(empleado)
-    listaproyectos = request.POST.getlist("proyecto")
+        tarea.responsable=empleado
+    listaproyectos = request.POST["proyecto"]
     for id in listaproyectos:
         proyecto = Proyecto.objects.get(pk=id)
-        tarea.proyecto.add(proyecto)
+        tarea.proyecto=proyecto
     tarea.save()
     return redirect('listatareas')
-
-#Encargado de la eliminación de una tarea
-#def eliminar_tarea(request,id):
-    #tarea = get_object_or_404(Tarea, id=id)
-    #if request.method =="POST":
-        #tarea.delete()
-        #return redirect()
-    #context={
-        #"object":tarea
-    #}
-    #context['titulo_pagina'] = 'Eliminación de tarea'
-    #context['titulo_pagina1'] = 'Eliminar tarea'
-    #return render(request,"eliminar_tarea.html", context)
-
+#Encargada de la eliminación de tareas
 class TareaDeleteView(DeleteView):
     model = Tarea
     template_name = 'eliminar_Tarea.html'
     success_url = reverse_lazy('listatareas')
-
-
+#ncargada de la modificación de tareas
 class TareaUpdateView(UpdateView):
     model = Tarea
     fields = '__all__'
@@ -161,8 +139,6 @@ class TareaUpdateView(UpdateView):
     context = {'listaempleados': listaempleados}
     template_name = 'modificar_tarea.html'
     success_url = reverse_lazy('listatareas')
-
-
 
 #Encargada de mostrar toda la lista de proyectos, ordenados por inicio
 def pruebalistaproyecto(request):
@@ -173,16 +149,26 @@ def pruebalistaproyecto(request):
     return render(request, 'lista_proyectos.html', context)
 
 #Encargada de mostrar un proyecto
+def proyectodetalles (request,id):
+    proyecto=get_object_or_404(Proyecto, pk=id)
+    empleados = proyecto.empleados.all()
+    textempl=""
+    for empleado in empleados:
+        textempl=textempl+empleado.nombre+" "+empleado.apellido+", "
+    context={'proyecto':proyecto, 'empleados':textempl,'titulo_pagina':'Detalles de proyecto',
+               'titulo_pagina1':'Detalles de proyecto'}
+    return render(request,'proyecto.html', context)
 class ProyectoDetailView(DetailView):
     model = Proyecto
     template_name = 'proyecto.html'
     def get_context_data(self, **kwargs):
         context = super(ProyectoDetailView, self).get_context_data(**kwargs)
+
         context['titulo_pagina'] = 'Detalles del proyecto'
         context['titulo_pagina1'] = 'Detalles del proyecto'
         return context
 
-#Encargada de la creacion de proyectos
+#Encargada de la creacion de el formulario de creación de proyectos
 def showform_proy(request):
     listaempleados = Empleado.objects.order_by('id')
     context = {'listaempleados': listaempleados}
@@ -190,7 +176,7 @@ def showform_proy(request):
     context['titulo_pagina1'] = 'Crear proyecto'
     return render(request, 'crear_proyecto.html', context)
 
-
+#Encargada de la creación de proyectos
 def crearproyecto(request):
     nombre = request.POST["nombre"]
     descripcion = request.POST["descripcion"]
@@ -198,9 +184,7 @@ def crearproyecto(request):
     fin = request.POST["fin"]
     presupuesto = request.POST['presupuesto']
     cliente = request.POST['cliente']
-    
     proyecto = Proyecto()
-    
     proyecto.nombre = nombre
     proyecto.descripcion = descripcion
     proyecto.inicio = inicio
@@ -215,12 +199,13 @@ def crearproyecto(request):
     proyecto.save()
     return redirect('listaproyectos')
 
+#Encargada de la eliminación de proyectos
 class ProyectosDeleteView(DeleteView):
     model = Proyecto
     template_name = 'eliminar_proyecto.html'
     success_url = reverse_lazy('listaproyectos')
 
-
+#Encargada de la modificación de proyectos
 class ProyectosUpdateView(UpdateView):
     model = Proyecto
     fields = '__all__'
