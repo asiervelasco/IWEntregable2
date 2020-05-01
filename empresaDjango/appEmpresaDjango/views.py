@@ -152,11 +152,13 @@ def pruebalistaproyecto(request):
 def proyectodetalles (request,id):
     proyecto=get_object_or_404(Proyecto, pk=id)
     empleados = proyecto.empleados.all()
+    tareas =Tarea.objects.all()
     textempl=""
     for empleado in empleados:
         textempl=textempl+empleado.nombre+" "+empleado.apellido+", "
     context={'proyecto':proyecto, 'empleados':textempl,'titulo_pagina':'Detalles de proyecto',
-               'titulo_pagina1':'Detalles de proyecto'}
+               'titulo_pagina1':'Detalles de proyecto',
+               'tareas':tareas}
     return render(request,'proyecto.html', context)
 
 
