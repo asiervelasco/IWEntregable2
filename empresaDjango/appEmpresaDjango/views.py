@@ -148,7 +148,7 @@ def pruebalistaproyecto(request):
                'titulo_pagina1':'Gestion de proyectos'}
     return render(request, 'lista_proyectos.html', context)
 
-#Encargada de mostrar un proyecto
+#Encargada de mostrar un proyecto en detalle
 def proyectodetalles (request,id):
     proyecto=get_object_or_404(Proyecto, pk=id)
     empleados = proyecto.empleados.all()
@@ -158,15 +158,7 @@ def proyectodetalles (request,id):
     context={'proyecto':proyecto, 'empleados':textempl,'titulo_pagina':'Detalles de proyecto',
                'titulo_pagina1':'Detalles de proyecto'}
     return render(request,'proyecto.html', context)
-class ProyectoDetailView(DetailView):
-    model = Proyecto
-    template_name = 'proyecto.html'
-    def get_context_data(self, **kwargs):
-        context = super(ProyectoDetailView, self).get_context_data(**kwargs)
 
-        context['titulo_pagina'] = 'Detalles del proyecto'
-        context['titulo_pagina1'] = 'Detalles del proyecto'
-        return context
 
 #Encargada de la creacion de el formulario de creación de proyectos
 def showform_proy(request):
