@@ -14,11 +14,13 @@
                     <tr>
                         <th class="tittabla">ID</th>
                         <th class="tittabla">Nombre </th>
+                        <th class="tittabla">Acciones</th>
                     </tr>
-                    {% for a in lista_cliente %}
+                    {% for a in lista_clientes %}
                         <tr>
                             <td class="comptab">{{ a.id }}</td>
                             <td class="comptab">{{ a.nombre }}</td>
+                            <td class="comptab"><a href="{% url 'cliente' a.id %}">Leer</a></td>
                         </tr>
                     {% endfor %}
                 </table>

@@ -144,7 +144,7 @@ class TareaUpdateView(UpdateView):
 
 #Encargada de mostrar toda la lista de proyectos, ordenados por inicio
 def pruebalistaproyecto(request):
-    proyectos =Proyecto.objects.order_by('id')
+    proyectos = Proyecto.objects.order_by('id')
     context = {'lista_proyectos': proyectos,
                'titulo_pagina':'Gestor de proyectos',
                'titulo_pagina1':'Gestion de proyectos'}
@@ -168,6 +168,7 @@ def proyectodetalles (request,id):
 def showform_proy(request):
     listaempleados = Empleado.objects.order_by('id')
     context = {'listaempleados': listaempleados}
+
     context['titulo_pagina'] = 'Crear proyecto'
     context['titulo_pagina1'] = 'Crear proyecto'
     return render(request, 'crear_proyecto.html', context)
@@ -216,7 +217,7 @@ def pruebalistaclientes(request):
     cliente = Cliente.objects.order_by('id')
     context = {'lista_clientes': cliente,
                'titulo_pagina':'Listado de clientes',
-               'titulo_pagina1':'Clientes'}
+               'titulo_pagina1':'Listado de clientes'}
     return render(request, 'lista_clientes.html', context)
 
 #Encargado de mostrar un único cliente
