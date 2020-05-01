@@ -233,7 +233,7 @@ class ClienteDetailView(DetailView):
 def show_formC(request):
     return render(request, 'crear_cliente.html')
 
-def crearcliente(request):
+def crearCliente(request):
     nombre = request.POST["nombre"]
     cliente = Cliente()
     cliente.nombre = nombre
