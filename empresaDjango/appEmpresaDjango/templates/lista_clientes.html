@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+        <div id = "page">
+            <div id = "page_text">
+
+               Los clientes actuales son los siguientes
+
+            </div>
+
+            <div id= "tabla">
+                <table class="tablapla">
+                    <tr>
+                        <th class="tittabla">ID</th>
+                        <th class="tittabla">Nombre </th>
+                    </tr>
+                    {% for a in lista_cliente %}
+                        <tr>
+                            <td class="comptab">{{ a.id }}</td>
+                            <td class="comptab">{{ a.nombre }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div><center><a href="{% url 'creador_cliente' %}">Añadir un cliente</a></center></div>
+        </div>
+
+
+{% endblock %}

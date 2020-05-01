@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+        <div id = "page">
+            <div id = "page_text">
+
+               Esta es la información del cliente
+
+            </div>
+
+            <div id= "tabla">
+                <table class="tablapla">
+                    <tr>
+                        <th class="tittabla">ID</th>
+                        <th class="tittabla">Nombre</th>
+                        <th class="tittabla">Modificar</th>
+                        <th class="tittabla">Eliminar</th>
+                    </tr>
+                    <tr>
+                        <td class="comptab">{{ empleado.id }}</td>
+                        <td class="comptab">{{ empleado.nombre }}</td>
+                        <td class="comptab"><a href="{% url 'clienteUpdateView' cliente.id %}">MODIFICAR</a></td>
+                        <td class="comptab"><a href="{% url 'clienteDeleteView' cliente.id %}">ELIMINAR</a></td>
+                    </tr>
+                </table>
+                <div><center><a href="{% url 'listaclientes' %}">Volver a la lista de clientes</a></center></div>
+            </div>
+        </div>
+
+{% endblock %}

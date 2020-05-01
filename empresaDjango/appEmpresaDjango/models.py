@@ -13,8 +13,6 @@ class Empleado(models.Model):
     def __str__(self):
         return f'{self.id} -> {self.dni}'
 
-
-
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=150)
     descripcion = models.CharField(max_length=1000)
@@ -38,6 +36,11 @@ class Tarea(models.Model):
     notas = models.CharField(max_length=150)
     proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.id} -> {self.nombre}'
+
+class Cliente(models.Model):
+    nombre = models.CharField(max_length=150)
 
     def __str__(self):
         return f'{self.id} -> {self.nombre}'

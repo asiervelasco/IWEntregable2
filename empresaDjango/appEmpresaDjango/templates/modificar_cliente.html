@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+<div id="page">
+    <div id = "page_text">
+        <form action="{% url 'clienteUpdateView' cliente.id %}" method="post">
+            {% csrf_token %}
+            <div><center>{{form.as_p}}</center></div>
+            <div><center><input type="submit" value="Actualizar cliente" /></center></div>
+            <div><center><a href="{% url 'listaclientes' %}">Volver a la lista de clientes</a></center></div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

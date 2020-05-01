@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .models import Empleado, Tarea, Proyecto
-from .forms import EmpleadoForm, TareaForm, ProyectoForm
+from .models import Empleado, Tarea, Proyecto, Cliente
+from .forms import EmpleadoForm, TareaForm, ProyectoForm, ClienteForm
 from django.views.generic import  DetailView, ListView, DeleteView, UpdateView
 from django.urls import reverse_lazy, reverse
 
@@ -60,7 +60,9 @@ class EmpleadosUpdateView(UpdateView):
     template_name = 'modificar_empleado.html'
     success_url = reverse_lazy('listaempleados')
 
-#Encargado de mostrar un único empleado
+
+
+#Encargado de mostrar una única tarea
 class TareaDetailView(DetailView):
     model = Tarea
     template_name = 'tarea.html'
@@ -69,8 +71,6 @@ class TareaDetailView(DetailView):
         context['titulo_pagina'] = 'Detalles de la tarea'
         context['titulo_pagina1'] = 'Detalles de la tarea'
         return context
-
-
 
 #Encargada de mostrar toda la lista de tareas, ordenadas por id
 def pruebalistatarea(request):
@@ -126,12 +126,14 @@ def creartarea(request):
         tarea.proyecto=proyecto
     tarea.save()
     return redirect('listatareas')
+
 #Encargada de la eliminación de tareas
 class TareaDeleteView(DeleteView):
     model = Tarea
     template_name = 'eliminar_Tarea.html'
     success_url = reverse_lazy('listatareas')
 #ncargada de la modificación de tareas
+
 class TareaUpdateView(UpdateView):
     model = Tarea
     fields = '__all__'
@@ -207,3 +209,46 @@ class ProyectosUpdateView(UpdateView):
     context = {'listaempleados': listaempleados}
     template_name = 'modificar_proyecto.html'
     success_url = reverse_lazy('listaproyectos')
+
+
+#Encargada de mostrar toda la lista de clientes, ordenados por id
+def pruebalistaclientes(request):
+    cliente = Cliente.objects.order_by('id')
+    context = {'lista_clientes': cliente,
+               'titulo_pagina':'Listado de clientes',
+               'titulo_pagina1':'Clientes'}
+    return render(request, 'lista_clientes.html', context)
+
+#Encargado de mostrar un único cliente
+class ClienteDetailView(DetailView):
+    model = Cliente
+    template_name = 'cliente.html'
+    def get_context_data(self, **kwargs):
+        context = super(ClienteDetailView, self).get_context_data(**kwargs)
+        context['titulo_pagina'] = 'Detalles del cliente'
+        context['titulo_pagina1'] = 'Detalles del cliente'
+        return context
+
+#Las siguientes dos funciones se encargan de crear el formulario y de la creaciónd del cliente
+def show_formC(request):
+    return render(request, 'crear_cliente.html')
+
+def crearcliente(request):
+    nombre = request.POST["nombre"]
+    cliente = Cliente()
+    cliente.nombre = nombre
+    cliente.save()
+    return redirect('listaclientes')
+
+#Encargado de la eliminación del cliente seleccionado
+class ClienteDeleteView(DeleteView):
+    model = Cliente
+    template_name = 'eliminar_cliente.html'
+    success_url = reverse_lazy('listaclientes')
+
+#Encargada de actualizar el cliente seleccionado
+class ClienteUpdateView(UpdateView):
+    model = Cliente
+    fields = '__all__'
+    template_name = 'modificar_cliente.html'
+    success_url = reverse_lazy('listaclientes')

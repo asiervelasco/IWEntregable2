@@ -23,4 +23,11 @@ urlpatterns = [
      path('proyecto/<int:pk>/eliminar/', views.ProyectosDeleteView.as_view(), name='eliminar_proyecto'),
      path('proyecto/<int:pk>/actualizar/', views.ProyectosUpdateView.as_view(), name='actualizar_proyecto'),
 
+     path('cliente/lista/', views.pruebalistaclientes, name='listaclientes'),
+     path('cliente/<int:pk>/', views.ClienteDetailView.as_view(), name='cliente'),
+     path('cliente/creacion/', views.show_formC, name='creador_cliente'),
+     path('cliente/crear/', views.crearcliente, name='crear_cliente'),
+     path('cliente/actualizar/<int:pk>', views.ClienteUpdateView.as_view(), name='clienteUpdateView'),
+     path('cliente/borrar/<int:pk>', views.ClienteDeleteView.as_view(), name='clienteDeleteView'),
+
 ]

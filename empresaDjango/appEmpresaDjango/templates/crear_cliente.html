@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+<div id="page">
+    <div id = "page_text">
+        <form action="{% url 'crear_cliente' %}" method="post">
+            {% csrf_token %}
+            <div class="columna1">
+                <div id="formulario">
+                    Nombre
+                </div>
+                <input class="formulario_input" type="text" name="nombre"><br>
+            </div>
+            <div><center><input type="submit" value="Nuevo cliente" /></center></div>
+            <div><center><a href="{% url 'listaclientes' %}">Volver a la lista de clientes</a></center></div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

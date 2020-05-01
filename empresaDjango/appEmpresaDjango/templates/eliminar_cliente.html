@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+        <div id = "page">
+            <div id = "page_text">
+                <form action="{% url 'clienteDeleteView' cliente.id %}" method="post">{% csrf_token %}
+                    <h3>Quieres eliminar este cliente?</h3>
+                    <div>
+                        <center>
+                            <p><input type="submit" value="SI" />  
+                            <a href="{% url 'listaclientes' %}">Cancel</a></p
+                        ></center>
+                    </div>
+                </form>
+            </div>
+        </div>
+{% endblock %}
