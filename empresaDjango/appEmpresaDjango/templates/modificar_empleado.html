@@ -6,31 +6,11 @@
     <div id = "page_text">
         <form action="{% url 'empleadosUpdateView' empleado.id %}" method="post">
             {% csrf_token %}
-            <div class="columna1">
-                <div id="formulario">
-                    Nombre
-                </div>
-                <input class="formulario_input" type="text" name="nombre"><br>
-                <div id="formulario">
-                    Apellido
-                </div>
-                <input class="formulario_input" type="text" name="apellido"><br>
-                <div id="formulario">
-                    DNI
-                </div>
-                <input class="formulario_input" type="text" name="dni"><br>
-                <div id="formulario">
-                    TELÉFONO
-                </div>
-                <input class="formulario_input" type="number" name="telefono"><br>
-                <div id="formulario">
-                    EMAIL
-                </div>
-                <input class="formulario_input" type="email" name="email">
-            </div>
-            <div><center><a href="{% url 'listaempleados' %}">Volver a la lista de empleados</a></center></div>
+            <div><center>{{form.as_p}}</center></div>
             <div><center><input type="submit" value="Actualizar empleado" /></center></div>
+            <div><center><a href="{% url 'listaempleados' %}">Volver a la lista de empleados</a></center></div>
         </form>
     </div>
 </div>
+
 {% endblock %}
