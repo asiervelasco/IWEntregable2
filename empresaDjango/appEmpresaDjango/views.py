@@ -71,6 +71,9 @@ class TareaDetailView(DetailView):
         context['titulo_pagina1'] = 'Detalles de la tarea'
         print(context)
         return context
+
+
+
 #Encargada de mostrar toda la lista de tareas, ordenadas por id
 def pruebalistatarea(request):
     tareas =Tarea.objects.order_by('id')
@@ -90,7 +93,10 @@ class TareaDetailView(DetailView):
 #Encargada de la creacion de tareas
 def showform_proy1(request):
     listaempleados = Empleado.objects.order_by('id')
-    context = {'listaempleados': listaempleados}
+    listaproyectos = Proyecto.objects.order_by('id')
+    context = {'listaempleados': listaempleados,
+               'listaproyectos': listaproyectos}
+    
     context['titulo_pagina'] = 'Crear tarea'
     context['titulo_pagina1'] = 'Crear tarea'
     return render(request, 'crear_tarea.html', context)
@@ -104,7 +110,10 @@ def creartarea(request):
     prioridad = request.POST["prioridad"]
     estado = request.POST["estado"]
     notas = request.POST["notas"]
+    proyecto = request.POST["proyecto"]
+    
     tarea = Tarea()
+    
     tarea.nombre = nombre
     tarea.descripcion = descripcion
     tarea.inicio = inicio
@@ -113,26 +122,45 @@ def creartarea(request):
     tarea.prioridad = prioridad
     tarea.estado = estado
     tarea.notas = notas
+    tarea.proyecto = proyecto
     tarea.save()
     listaempleados = request.POST.getlist("responsable")
     for id in listaempleados:
         empleado = Empleado.objects.get(pk=id)
         tarea.responsable.add(empleado)
+    listaproyectos = request.POST.getlist("proyecto")
+    for id in listaproyectos:
+        proyecto = Proyecto.objects.get(pk=id)
+        tarea.proyecto.add(proyecto)
     tarea.save()
     return redirect('listatareas')
 
 #Encargado de la eliminación de una tarea
-def eliminar_tarea(request,id):
-    tarea = get_object_or_404(Tarea, id=id)
-    if request.method =="POST":
-        tarea.delete()
-        return redirect()
-    context={
-        "object":tarea
-    }
-    context['titulo_pagina'] = 'Eliminación de tarea'
-    context['titulo_pagina1'] = 'Eliminar tarea'
-    return render(request,"eliminar_tarea.html", context)
+#def eliminar_tarea(request,id):
+    #tarea = get_object_or_404(Tarea, id=id)
+    #if request.method =="POST":
+        #tarea.delete()
+        #return redirect()
+    #context={
+        #"object":tarea
+    #}
+    #context['titulo_pagina'] = 'Eliminación de tarea'
+    #context['titulo_pagina1'] = 'Eliminar tarea'
+    #return render(request,"eliminar_tarea.html", context)
+
+class TareaDeleteView(DeleteView):
+    model = Tarea
+    template_name = 'eliminar_Tarea.html'
+    success_url = reverse_lazy('listatareas')
+
+
+class TareaUpdateView(UpdateView):
+    model = Tarea
+    fields = '__all__'
+    listaempleados = Empleado.objects.order_by('id')
+    context = {'listaempleados': listaempleados}
+    template_name = 'modificar_tarea.html'
+    success_url = reverse_lazy('listatareas')
 
 
 
@@ -170,7 +198,9 @@ def crearproyecto(request):
     fin = request.POST["fin"]
     presupuesto = request.POST['presupuesto']
     cliente = request.POST['cliente']
+    
     proyecto = Proyecto()
+    
     proyecto.nombre = nombre
     proyecto.descripcion = descripcion
     proyecto.inicio = inicio

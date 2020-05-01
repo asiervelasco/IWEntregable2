@@ -13,7 +13,8 @@ urlpatterns = [
      path('tarea/<int:pk>/', views.TareaDetailView.as_view(), name='tareaun'),
      path('tarea/crear/', views.creartarea, name='crear_tarea'),
      path('tarea/creacion/', views.showform_proy1, name='creador_tarea'),
-     path('tarea/<int:pk>/eliminar/', views.eliminar_tarea, name='eliminar_tarea'),
+     path('tarea/<int:pk>/eliminar/', views.TareaDeleteView.as_view(), name='eliminar_tarea'),
+     path('tarea/<int:pk>/actualizar/', views.TareaUpdateView.as_view(), name='actualizar_tarea'),
 
      path('proyecto/lista/', views.pruebalistaproyecto, name='listaproyectos'),
      path('proyecto/<int:pk>/', views.ProyectoDetailView.as_view(), name='proyectoun'),

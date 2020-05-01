@@ -24,6 +24,9 @@ class Proyecto(models.Model):
     cliente = models.CharField(max_length=150)
     empleados = models.ManyToManyField(Empleado)
 
+    def __str__(self):
+        return f'{self.id} -> {self.nombre}'
+
 class Tarea(models.Model):
     nombre = models.CharField(max_length=150)
     descripcion = models.CharField(max_length=1000)
