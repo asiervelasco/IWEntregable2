@@ -28,7 +28,7 @@ class EmpleadoDetailView(DetailView):
         context['titulo_pagina1'] = 'Detalles del empleado'
         return context
 
-#Las siguientes dos funciones se encargan de crear el formulario y de la creaciónd de el empleado
+#Las siguientes dos funciones se encargan de crear el formulario y de la creaciónd del empleado
 def show_form(request):
     return render(request, 'crear_empleado.html')
 
@@ -47,7 +47,7 @@ def crearempleado(request):
     empleado.save()
     return redirect('listaempleados')
 
-#Encargado de la eliminación de el empleado seleccionado
+#Encargado de la eliminación del empleado seleccionado
 class EmpleadosDeleteView(DeleteView):
     model = Empleado
     template_name = 'eliminar_empleado.html'
@@ -80,15 +80,6 @@ def pruebalistatarea(request):
                 'titulo_pagina1': 'Listado de tareas'}
     return render(request, 'lista_tareas.html', context)
 
-#Encargada de mostrar una tarea
-class TareaDetailView(DetailView):
-    model = Tarea
-    template_name = 'tarea.html'
-    def get_context_data(self, **kwargs):
-        context = super(TareaDetailView, self).get_context_data(**kwargs)
-        context['titulo_pagina'] = 'Detalles de la tarea'
-        return context
-
 #Encargada de la creacion de el formulario de creación de tareas
 def showform_proy1(request):
     listaempleados = Empleado.objects.order_by('id')
@@ -99,6 +90,7 @@ def showform_proy1(request):
     context['titulo_pagina'] = 'Crear tarea'
     context['titulo_pagina1'] = 'Crear tarea'
     return render(request, 'crear_tarea.html', context)
+
 #Encargada de la creacion de las tareas
 def creartarea(request):
     nombre = request.POST["nombre"]
@@ -132,8 +124,8 @@ class TareaDeleteView(DeleteView):
     model = Tarea
     template_name = 'eliminar_Tarea.html'
     success_url = reverse_lazy('listatareas')
-#ncargada de la modificación de tareas
 
+#Encargada de la modificación de tareas
 class TareaUpdateView(UpdateView):
     model = Tarea
     fields = '__all__'
@@ -141,6 +133,8 @@ class TareaUpdateView(UpdateView):
     context = {'listaempleados': listaempleados}
     template_name = 'modificar_tarea.html'
     success_url = reverse_lazy('listatareas')
+
+
 
 #Encargada de mostrar toda la lista de proyectos, ordenados por inicio
 def pruebalistaproyecto(request):
@@ -163,8 +157,7 @@ def proyectodetalles (request,id):
                'tareas':tareas}
     return render(request,'proyecto.html', context)
 
-
-#Encargada de la creacion de el formulario de creación de proyectos
+#Encargada de la creacion del formulario de proyectos
 def showform_proy(request):
     listaempleados = Empleado.objects.order_by('id')
     listaclientes = Cliente.objects.order_by('id')
@@ -215,6 +208,7 @@ class ProyectosUpdateView(UpdateView):
     success_url = reverse_lazy('listaproyectos')
 
 
+
 #Encargada de mostrar toda la lista de clientes, ordenados por id
 def pruebalistaclientes(request):
     cliente = Cliente.objects.order_by('id')
@@ -233,7 +227,7 @@ class ClienteDetailView(DetailView):
         context['titulo_pagina1'] = 'Detalles del cliente'
         return context
 
-#Las siguientes dos funciones se encargan de crear el formulario y de la creaciónd del cliente
+#Las siguientes dos funciones se encargan de crear el formulario y de la creación del cliente
 def show_formC(request):
     return render(request, 'crear_cliente.html')
 

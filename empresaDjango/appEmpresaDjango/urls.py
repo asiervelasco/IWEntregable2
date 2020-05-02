@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+#Listado de urls para la navegación del proyecto
+
 urlpatterns = [
      path('empleado/lista/', views.pruebalista, name='listaempleados'),
      path('empleado/<int:pk>/', views.EmpleadoDetailView.as_view(), name='empleadoun'),

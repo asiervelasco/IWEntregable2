@@ -1,7 +1,7 @@
 from django.db import models
 import datetime
 
-estado = [('Abierta'), ('Asignada'), ('En proceso'), ('Finalizada')]
+#Lista de models que vamos a utilizar para la creación de empleados, tareas, proyectos y clientes
 
 class Empleado(models.Model):
     dni = models.CharField(max_length=9)

@@ -1,6 +1,8 @@
 from django import forms
 from .models import Empleado, Tarea, Proyecto, Cliente
 
+#Lista de forms que vamos a utilizar
+
 class EmpleadoForm(forms.ModelForm):
     class Meta:
         model = Empleado

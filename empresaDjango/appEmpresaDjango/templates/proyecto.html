@@ -12,9 +12,10 @@
                     <table class="tablapla">
                         <thead>
                             <tr>
+                                <th class="tittabla">ID</th>
                                 <th class="tittabla">Nombre</th>
                                 <th class="tittabla">Descripcion</th>
-                                <th class="tittabla">Fecha de inicio y final</th>
+                                <th class="tittabla">Fecha de inicio y fin</th>
                                 <th class="tittabla">Presupuesto</th>
                                 <th class="tittabla">Cliente</th>
                                 <th class="tittabla">Empleados</th>
@@ -24,6 +25,7 @@
                         </thead>
                         <tbody>
                             <tr>
+                                <td class="comptab">{{ proyecto.id }}</td>
                                 <td class="comptab">{{ proyecto.nombre }}</td>
                                 <td class="comptab">{{ proyecto.descripcion }}</td>
                                 <td class="comptab">{{ proyecto.inicio }}  -  {{ proyecto.fin }}</td>
