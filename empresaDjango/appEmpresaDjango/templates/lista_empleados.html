@@ -5,7 +5,7 @@
         <div id = "page">
             <div id = "page_text">
 
-               Todos los trabajadores actuales son los siguientes.
+                <h2>EMPLEADOS</h2>
 
             </div>
 
@@ -15,14 +15,18 @@
                         <th class="tittabla">ID</th>
                         <th class="tittabla">Nombre </th>
                         <th class="tittabla">Apellido</th>
-                        <th class="tittabla">Acciones</th>
+                        <th class="tittabla">Ver más</th>
                     </tr>
                     {% for a in lista_empleado %}
                         <tr>
                             <td class="comptab">{{ a.id }}</td>
                             <td class="comptab">{{ a.nombre }}</td>
                             <td class="comptab">{{ a.apellido }}</td>
-                            <td class="comptab"><a href="{% url 'empleadoun' a.id %}">Leer</a></td>
+                            <td class="comptab">
+                                <a href="{% url 'proyectoun' a.id %}" class= "boton_borrar">
+                                    <img src="{% static 'ojo.png' %}">
+                                </a> 
+                            </td>
                         </tr>
                     {% endfor %}
                 </table>

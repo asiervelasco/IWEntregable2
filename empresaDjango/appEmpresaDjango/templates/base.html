@@ -19,20 +19,22 @@
             </div>
             <div id = "menu-2">
                 <ul class="nav">
-                    <li><a href="">PROYECTOS</a>
+                    <li><a>PROYECTOS</a>
                     <ul>
                         <li><a href="{% url 'creador_proyecto' %}">NUEVO PROYECTO</a></li>
                         <li><a href="{% url 'listaproyectos' %}">GESTIONAR PROYECTOS</a></li>
                     </ul>
                     </li>
-                    <li><a href="">TAREAS</a>
+                    <li><a>TAREAS</a>
                         <ul>
                             <li><a href="{% url 'creador_tarea' %}">NUEVA TAREA</a></li>
                             <li><a href="{% url 'listatareas' %}">GESTIONAR TAREAS</a></li>
                         </ul>
                     </li>
-                    <li><a href="{% url 'listaempleados' %}">GESTIONAR EMPLEADOS</a></li>
-                    <li><a href="{% url 'listaclientes' %}">GESTIONAR CLIENTES</a></li>
+                    <li><a>GESTIONAR PERSONAS</a>
+                        <ul>
+                        <li><a href="{% url 'listaempleados' %}">GESTIONAR EMPLEADOS</a><li>
+                        <li><a href="{% url 'listaclientes' %}">GESTIONAR CLIENTES</a></li></ul></li>
                 </ul>
             </div>
         </div>

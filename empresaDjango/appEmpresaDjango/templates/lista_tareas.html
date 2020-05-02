@@ -5,7 +5,7 @@
         <div id = "page">
             <div id = "page_text">
 
-               Todas las tareas actuales son los siguientes.
+              <h2>TAREAS</h2>
 
             </div>
 
@@ -16,7 +16,7 @@
                         <th class="tittabla">Proyecto</th>
                         <th class="tittabla">Fecha de inicio</th>
                         <th class="tittabla">Fecha fin</th>
-                        <th class="tittabla">Acciones</th>
+                        <th class="tittabla">Ver más</th>
                     </tr>
                     {% for a in lista_tareas %}
                         <tr>
@@ -24,7 +24,11 @@
                             <td class="comptab">{{ a.proyecto }}</td>
                             <td class="comptab">{{ a.inicio }}</td>
                             <td class="comptab">{{ a.fin }}</td>
-                            <td class="comptab"><a href="{% url 'tareaun' a.id %}">Leer</a></td>
+                            <td class="comptab">
+                                <a href="{% url 'proyectoun' a.id %}" class= "boton_borrar">
+                                    <img src="{% static 'ojo.png' %}">
+                                </a> 
+                            </td>
                         </tr>
                     {% endfor %}
                 </table>

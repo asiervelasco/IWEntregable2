@@ -5,8 +5,8 @@
 
         <div id = "page">
             <div id = "page_text">
-
-               Todos los proyectos actuales son los siguientes.
+                
+                <h2>PROYECTOS</h2>
 
             </div>
 
@@ -16,14 +16,18 @@
                         <th class="tittabla">Nombre</th>
                         <th class="tittabla">Descripción</th>
                         <th class="tittabla">Cliente</th>
-                        <th class="tittabla">Información</th>
+                        <th class="tittabla">Ver más</th>
                     </tr>
                     {% for a in lista_proyectos %}
                         <tr>
                             <td class="comptab">{{ a.nombre }}</td>
                             <td class="comptab">{{ a.descripcion }}</td>
                             <td class="comptab">{{ a.cliente }}</td>
-                            <td class="comptab"><a href="{% url 'proyectoun' a.id %}">Ver</a> </td>
+                            <td class="comptab">
+                                <a href="{% url 'proyectoun' a.id %}" class= "boton_borrar">
+                                    <img src="{% static 'ojo.png' %}">
+                                </a> 
+                            </td>
                         </tr>
                     {% endfor %}
                 </table>
