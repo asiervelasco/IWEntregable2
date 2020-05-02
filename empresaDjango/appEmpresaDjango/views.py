@@ -189,13 +189,13 @@ def crearproyecto(request):
     proyecto.fin = fin
     proyecto.presupuesto = presupuesto
     Listaempleados = request.POST.getlist("empleados")
+    clienteid = request.POST["cliente"]
+    cliente = Cliente.objects.get(pk=int(clienteid))
+    proyecto.cliente = cliente
+    proyecto.save()
     for cosa in Listaempleados:
         empleado = Empleado.objects.get(pk=cosa)
         proyecto.empleados.add(empleado)
-    listaclientes = request.POST["cliente"]
-    for cosa in listaclientes:
-        cliente = cliente.objects.get(pk=cosa)
-        proyecto.cliente = cliente
     proyecto.save()
     return redirect('listaproyectos')
 
