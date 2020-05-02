@@ -25,7 +25,7 @@ class Proyecto(models.Model):
     inicio = models.DateField(default=datetime.date.today)
     fin = models.DateField(default=datetime.date.today)
     presupuesto = models.CharField(max_length=150)
-    cliente = models.CharField(max_length=150)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     empleados = models.ManyToManyField(Empleado)
 
     def __str__(self):

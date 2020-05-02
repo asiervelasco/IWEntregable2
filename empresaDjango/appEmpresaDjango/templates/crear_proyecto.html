@@ -30,7 +30,11 @@
                 <div id="formulario">
                     Cliente
                 </div>
-                <input class="formulario_input" type="text" name="cliente"><br>
+                <select id="select_cliente" name="cliente" >
+                    {% for a in listaclientes %}
+                    <option value="{{ a.id }}"> {{ a.nombre}}</option>
+                    {% endfor %}
+                </select>
                 <div id="formulario">
                     Empleados que participan
                 </div>

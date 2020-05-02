@@ -167,7 +167,9 @@ def proyectodetalles (request,id):
 #Encargada de la creacion de el formulario de creación de proyectos
 def showform_proy(request):
     listaempleados = Empleado.objects.order_by('id')
-    context = {'listaempleados': listaempleados}
+    listaclientes = Cliente.objects.order_by('id')
+    context = {'listaempleados': listaempleados,
+               'listaclientes': listaclientes}
 
     context['titulo_pagina'] = 'Crear proyecto'
     context['titulo_pagina1'] = 'Crear proyecto'
@@ -180,19 +182,20 @@ def crearproyecto(request):
     inicio = request.POST["inicio"]
     fin = request.POST["fin"]
     presupuesto = request.POST['presupuesto']
-    cliente = request.POST['cliente']
     proyecto = Proyecto()
     proyecto.nombre = nombre
     proyecto.descripcion = descripcion
     proyecto.inicio = inicio
     proyecto.fin = fin
     proyecto.presupuesto = presupuesto
-    proyecto.cliente = cliente
-    proyecto.save()
     Listaempleados = request.POST.getlist("empleados")
     for cosa in Listaempleados:
         empleado = Empleado.objects.get(pk=cosa)
         proyecto.empleados.add(empleado)
+    listaclientes = request.POST["cliente"]
+    for cosa in listaclientes:
+        cliente = cliente.objects.get(pk=cosa)
+        proyecto.cliente = cliente
     proyecto.save()
     return redirect('listaproyectos')
 
