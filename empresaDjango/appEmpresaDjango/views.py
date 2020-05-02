@@ -7,9 +7,6 @@ from django.views.generic import  DetailView, ListView, DeleteView, UpdateView
 from django.urls import reverse_lazy, reverse
 
 
-def index(request):
-    return HttpResponse("Listado de departamentos")
-
 #Encargada de mostrar toda la lista de empleados, ordenados por id
 def pruebalista(request):
     empleados =Empleado.objects.order_by('id')
