@@ -19,7 +19,7 @@
                         <th class="tittabla">Apellido</th>
                         <th class="tittabla">email</th>
                         <th class="tittabla">tlf</th>
-                        <th class="tittabla">Modificar</th>
+                        <th class="tittabla">Editar</th>
                         <th class="tittabla">Eliminar</th>
                     </tr>
                     <tr>
@@ -29,8 +29,13 @@
                         <td class="comptab">{{ empleado.apellido }}</td>
                         <td class="comptab">{{ empleado.email }}</td>
                         <td class="comptab">{{ empleado.telefono }}</td>
-                        <td class="comptab"><a href="{% url 'empleadosUpdateView' empleado.id %}">MODIFICAR</a></td>
-                        <td class="comptab"><a href="{% url 'empleadosDeleteView' empleado.id %}">ELIMINAR</a></td>
+                        <td class="comptab">
+                            <a href="{% url 'empleadosUpdateView' empleado.id %}" class= "boton_borrar">
+                                <img src="{% static 'editar.jpg' %}">
+                            </a> 
+                        </td>
+                        <td class="comptab"><a href="{% url 'empleadosDeleteView' empleado.id %}" class= "boton_borrar">
+                            <img src="{% static 'borrar.jpg' %}"></a></td>
                     </tr>
                 </table>
                 <div><center><a href="{% url 'listaempleados' %}">Volver a la lista de empleados</a></center></div>

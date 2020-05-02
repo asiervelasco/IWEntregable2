@@ -21,11 +21,8 @@
                         <tr>
                             <td class="comptab">{{ a.id }}</td>
                             <td class="comptab">{{ a.nombre }}</td>
-                            <td class="comptab">
-                                <a href="{% url 'proyectoun' a.id %}" class= "boton_borrar">
-                                    <img src="{% static 'ojo.png' %}">
-                                </a> 
-                            </td>
+                            <td class="comptab"><a href="{% url 'cliente' a.id %}" class= "boton_borrar">
+                                <img src="{% static 'ojo.png' %}"></a></td>
                         </tr>
                     {% endfor %}
                 </table>

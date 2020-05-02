@@ -21,7 +21,7 @@
                         <th class="tittabla">Estado de la tarea</th>
                         <th class="tittabla">Notas adicionales</th>
                         <th class="tittabla">Proyecto</th>
-                        <th class="tittabla">Modificar</th>
+                        <th class="tittabla">Editar</th>
                         <th class="tittabla">Eliminar</th>
                     </tr>
                     <tr>
@@ -34,8 +34,10 @@
                         <td class="comptab">{{ tarea.estado }}</td>
                         <td class="comptab">{{ tarea.notas }}</td>
                         <td class="comptab">{{ tarea.proyecto }}</td>
-                        <td class="comptab"><a href="{% url 'actualizar_tarea' tarea.id %}">MODIFICAR</a></td>
-                        <td class="comptab"><a href="{% url 'eliminar_tarea' tarea.id %}">ELIMINAR</a></td>
+                        <td class="comptab"><a href="{% url 'actualizar_tarea' tarea.id %}" class= "boton_borrar">
+                            <img src="{% static 'editar.jpg' %}"></a></td>
+                        <td class="comptab"><a href="{% url 'eliminar_tarea' tarea.id %}" class= "boton_borrar">
+                            <img src="{% static 'borrar.jpg' %}"></a></td>
                     </tr>
                 </table>
                 <div><center><a href="{% url 'listatareas' %}">Volver a la lista de tareas</a></center></div>

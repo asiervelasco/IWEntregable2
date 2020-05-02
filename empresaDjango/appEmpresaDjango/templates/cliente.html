@@ -21,8 +21,10 @@
                     <tr>
                         <td class="comptab">{{ cliente.id }}</td>
                         <td class="comptab">{{ cliente.nombre }}</td>
-                        <td class="comptab"><a href="{% url 'clienteUpdateView' cliente.id %}">MODIFICAR</a></td>
-                        <td class="comptab"><a href="{% url 'clienteDeleteView' cliente.id %}">ELIMINAR</a></td>
+                        <td class="comptab"><a href="{% url 'clienteUpdateView' cliente.id %}" class= "boton_borrar">
+                            <img src="{% static 'editar.jpg' %}"></a></td>
+                        <td class="comptab"><a href="{% url 'clienteDeleteView' cliente.id %}" class= "boton_borrar">
+                            <img src="{% static 'borrar.jpg' %}"></a></td>
                     </tr>
                 </table>
                 <div><center><a href="{% url 'listaclientes' %}">Volver a la lista de clientes</a></center></div>

@@ -19,8 +19,8 @@
                                 <th class="tittabla">Presupuesto</th>
                                 <th class="tittabla">Cliente</th>
                                 <th class="tittabla">Empleados</th>
-                                  <th class="tittabla">Modificar</th>
-                                <th class="tittabla">Borrar</th>
+                                  <th class="tittabla">EDITAR</th>
+                                <th class="tittabla">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,8 +32,10 @@
                                 <td class="comptab">{{ proyecto.presupuesto }}</td>
                                 <td class="comptab">{{ proyecto.cliente }}</td>
                                 <td class="comptab">{{empleados}}</td>
-                                <td class="comptab"><a href="{% url 'actualizar_proyecto' proyecto.id %}">Actualizar</a> </td>
-                                <td class="comptab"><a href="{% url 'eliminar_proyecto' proyecto.id %}">Borrar</a> </td>
+                                <td class="comptab"><a href="{% url 'actualizar_proyecto' proyecto.id %}" class= "boton_borrar">
+                                    <img src="{% static 'editar.jpg' %}"></a> </td>
+                                <td class="comptab"><a href="{% url 'eliminar_proyecto' proyecto.id %}" class= "boton_borrar">
+                                    <img src="{% static 'borrar.jpg' %}"></a> </td>
                             </tr>
                         </tbody>
                     </table>
@@ -55,7 +57,7 @@
                             <th class="tittabla">Estado de la tarea</th>
                             <th class="tittabla">Notas adicionales</th>
                             <th class="tittabla">Proyecto</th>
-                            <th class="tittabla">Modificar</th>
+                            <th class="tittabla">Editar</th>
                             <th class="tittabla">Eliminar</th>
                         </tr>
                     {%for tarea in tareas%}
@@ -70,8 +72,10 @@
                             <td class="comptab">{{ tarea.estado }}</td>
                             <td class="comptab">{{ tarea.notas }}</td>
                             <td class="comptab">{{ tarea.proyecto }}</td>
-                            <td class="comptab"><a href="{% url 'actualizar_tarea' tarea.id %}">MODIFICAR</a></td>
-                            <td class="comptab"><a href="{% url 'eliminar_tarea' tarea.id %}">ELIMINAR</a></td>
+                            <td class="comptab"><a href="{% url 'actualizar_tarea' tarea.id %}" class= "boton_borrar">
+                                <img src="{% static 'editar.jpg' %}"></a></td>
+                            <td class="comptab"><a href="{% url 'eliminar_tarea' tarea.id %}" class= "boton_borrar">
+                                <img src="{% static 'borrar.jpg' %}"></a></td>
                         </tr>
                         {%endif%}
                     {%endfor%}
