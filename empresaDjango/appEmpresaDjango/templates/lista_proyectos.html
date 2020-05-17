@@ -31,6 +31,12 @@
                         </tr>
                     {% endfor %}
                 </table>
+                <form action="{% url 'email' %}" method="post">
+                        {% csrf_token %}
+                        <div id="formulario"><center>Especifica el email al que quieras exportar los datos de los proyectos</center></div>
+                        <div><center><input class="formulario_input" type="email" name="email"></center></div><br>
+                        <div><center><input type="submit" value="Enviar email on la información de todos los proyectos" /></center></div><br>
+                    </form>
             </div>
 
         </div>

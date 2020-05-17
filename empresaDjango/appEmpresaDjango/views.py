@@ -5,6 +5,16 @@ from .models import Empleado, Tarea, Proyecto, Cliente
 from .forms import EmpleadoForm, TareaForm, ProyectoForm, ClienteForm
 from django.views.generic import  DetailView, ListView, DeleteView, UpdateView
 from django.urls import reverse_lazy, reverse
+from django.core.mail import send_mail
+
+def devolvermail(request):
+    emailrec=request.POST['email']
+    send_mail('Hola desde el gestor de proyectos',
+              'Este es el cuerpo',
+              'gestordeproyectosdeusto@gmail.com',
+              [str(emailrec)],
+              fail_silently=False)
+    return  render(request, 'email.html')
 
 
 #Encargada de mostrar toda la lista de empleados, ordenados por id

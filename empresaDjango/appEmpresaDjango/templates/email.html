@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+<div id = "page">
+            <div id = "page_text">
+                <h1>El email se ha enviado correctamente</h1>
+                <div><center><a href="{% url 'listaproyectos' %}">Volver a la lista de Proyectos</a></center></div>
+            </div>
+</div>
+{% endblock %}
