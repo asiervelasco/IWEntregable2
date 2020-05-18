@@ -9,8 +9,29 @@ from django.core.mail import send_mail
 
 def devolvermail(request):
     emailrec=request.POST['email']
+    listaproyectos = Proyecto.objects.order_by('id')
+    contenido=""
+    tareas = Tarea.objects.all()
+    for proyecto in listaproyectos:
+        contenido=contenido+"Nombre del proyecto: "+proyecto.nombre + "\n"
+        contenido = contenido + "Empleados de el proyecto: "
+        empleados=proyecto.empleados.all()
+        for empleado in empleados :
+            contenido=contenido+empleado.nombre+" "+empleado.apellido+","
+        contenido=contenido + "\n"
+        contenido = contenido + "Tareas asociadas a este proyecto: "
+        for tarea in tareas:
+            if tarea.proyecto==proyecto:
+                contenido=contenido+tarea.nombre+","
+        contenido = contenido + "\n"
+        contenido = contenido +"Descripción del proyecto: "+proyecto.descripcion + "\n"
+        contenido = contenido + "Nombre de el cliente: " + proyecto.cliente.nombre + "\n"
+        contenido = contenido + "Fecha de inicio: " + str(proyecto.inicio) + "\n"
+        contenido = contenido + "Fecha de fin: " + str(proyecto.fin) + "\n"
+        contenido = contenido + "Presupuesto: " + proyecto.presupuesto + "\n"+"\n"+"\n"
+
     send_mail('Hola desde el gestor de proyectos',
-              'Este es el cuerpo',
+              contenido,
               'gestordeproyectosdeusto@gmail.com',
               [str(emailrec)],
               fail_silently=False)
