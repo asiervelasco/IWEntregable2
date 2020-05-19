@@ -31,6 +31,8 @@ urlpatterns = [
      path('cliente/crear/', views.crearCliente, name='crear_cliente'),
      path('cliente/actualizar/<int:pk>', views.ClienteUpdateView.as_view(), name='clienteUpdateView'),
      path('cliente/borrar/<int:pk>', views.ClienteDeleteView.as_view(), name='clienteDeleteView'),
-     path('email/',views.devolvermail, name='email')
 
+     path('email/',views.devolvermail, name='email'),
+
+     path('clientes/<int:id>', views.ClientesAPI.as_view(),name='clientesAPI')
 ]

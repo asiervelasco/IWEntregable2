@@ -2,10 +2,23 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .models import Empleado, Tarea, Proyecto, Cliente
-from .forms import EmpleadoForm, TareaForm, ProyectoForm, ClienteForm
+from django.forms.models import model_to_dict
 from django.views.generic import  DetailView, ListView, DeleteView, UpdateView
 from django.urls import reverse_lazy, reverse
 from django.core.mail import send_mail
+from django.http import JsonResponse
+
+
+class ClientesAPI(View):
+    def get(self,request,id):
+        lista=Cliente.objects.get(id=id)
+        return JsonResponse(model_to_dict(lista))
+
+
+
+
+
+
 
 def devolvermail(request):
     emailrec=request.POST['email']
@@ -239,9 +252,7 @@ class ProyectosUpdateView(UpdateView):
 
 #Encargada de mostrar toda la lista de clientes, ordenados por id
 def pruebalistaclientes(request):
-    cliente = Cliente.objects.order_by('id')
-    context = {'lista_clientes': cliente,
-               'titulo_pagina':'Listado de clientes',
+    context = {'titulo_pagina':'Listado de clientes',
                'titulo_pagina1':'Listado de clientes'}
     return render(request, 'lista_clientes.html', context)
 
