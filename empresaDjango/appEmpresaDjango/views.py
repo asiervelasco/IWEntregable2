@@ -1,19 +1,27 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .models import Empleado, Tarea, Proyecto, Cliente
 from django.forms.models import model_to_dict
-from django.views.generic import  DetailView, ListView, DeleteView, UpdateView
-from django.urls import reverse_lazy, reverse
+from django.views.generic import  DetailView, DeleteView, UpdateView
+from django.urls import reverse_lazy
 from django.core.mail import send_mail
 from django.http import JsonResponse
-
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
 class ClientesAPI(View):
     def get(self,request,id):
         lista=Cliente.objects.get(id=id)
         return JsonResponse(model_to_dict(lista))
 
+@method_decorator(csrf_exempt, name='dispatch')
+class ClientesCreación(View):
+    def post(self, request):
+        cliente=Cliente()
+        print(request.POST['nombre'])
+        cliente.nombre=request.POST['nombre']
+        cliente.save()
+        return JsonResponse(model_to_dict(cliente))
 
 
 
@@ -252,7 +260,9 @@ class ProyectosUpdateView(UpdateView):
 
 #Encargada de mostrar toda la lista de clientes, ordenados por id
 def pruebalistaclientes(request):
-    context = {'titulo_pagina':'Listado de clientes',
+    cliente = Cliente.objects.order_by('id')
+    context = {'lista_clientes': cliente,
+               'titulo_pagina':'Listado de clientes',
                'titulo_pagina1':'Listado de clientes'}
     return render(request, 'lista_clientes.html', context)
 

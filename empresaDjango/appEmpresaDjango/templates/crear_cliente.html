@@ -4,18 +4,39 @@
 {% block contenido %}
 <div id="page">
     <div id = "page_text">
-        <form action="{% url 'crear_cliente' %}" method="post">
+        <form onsubmit="return false;" id="formulario">
             {% csrf_token %}
             <div class="columna1">
                 <div id="formulario">
                     Nombre
                 </div>
-                <input class="formulario_input" type="text" name="nombre"><br>
+                <input class="formulario_input" type="text" id="nombre" name="nombre"><br>
             </div>
-            <div><center><input type="submit" value="Nuevo cliente" /></center></div>
+            <div><center><button onclick="Crearobj()">Crear cliente</button></center></div>
             <div><center><a href="{% url 'listaclientes' %}">Volver a la lista de clientes</a></center></div>
         </form>
     </div>
 </div>
+<script>
+    function Crearobj() {
+    var elnombre = document.getElementById("nombre").value;
+     fetch('http://127.0.0.1:8000/appEmpresaDjango/clientes/', {
+     method:"POST",
+     headers: {
+        'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify({
+            nombre : elnombre
+            })
+            })
+            .then(response => response.json())
+            .then(json => console.log(json))
 
+        var para = document.createElement("p");
+    var node = document.createTextNode("Se ha añadido el cliente");
+    para.appendChild(node);
+    var element = document.getElementById("page_text");
+    element.appendChild(para);
+    }
+</script>
 {% endblock %}
