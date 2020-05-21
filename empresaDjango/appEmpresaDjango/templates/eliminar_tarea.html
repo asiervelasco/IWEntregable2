@@ -5,7 +5,7 @@
         <div id = "page">
             <div id = "page_text">
                 <form action="{% url 'eliminar_tarea' tarea.id %}"method='POST'>{% csrf_token %}
-                    <h3>Quieres eliminar esta tarea?</h3>
+                    <h3>¿Quieres eliminar esta tarea?</h3>
                     <div><center><p><input type="submit" value="SI" />  <a href='../'>Cancel</a></p></center></div>
                 </form>
             </div>
