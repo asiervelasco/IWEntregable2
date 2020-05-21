@@ -4,85 +4,36 @@
 {% block contenido %}
         <script>
             var SERVICE_URL="http://127.0.0.1:8000/appEmpresaDjango/clientes/"
-            var posicion=1
             function loadDatamas() {
-            SERVICE_URL="http://127.0.0.1:8000/appEmpresaDjango/clientes/"
-            otraurl="http://127.0.0.1:8000/appEmpresaDjango/cliente/"
-                posicion=posicion+1
-                SERVICE_URL=SERVICE_URL+posicion
-                otraurl=otraurl+posicion+"/"
-                var request = new XMLHttpRequest();
-                fetch(SERVICE_URL).then(function(response) {
-                console.log(response.status);
-                if (response.status==500){
-                posicion=0
-                SERVICE_URL="http://127.0.0.1:8000/appEmpresaDjango/clientes/"
-                otraurl="http://127.0.0.1:8000/appEmpresaDjango/cliente/"
-                SERVICE_URL=SERVICE_URL+posicion
-                otraurl=otraurl+posicion+"/"
-                alert("No hay mas clientes")
-                }
-                 });
-
                 fetch(SERVICE_URL)
                     .then((response) => response.json())
                     .then((json) => {
-                        let qElement = document.getElementById("Clienteid");
-                        qElement.textContent = `"${json.id}"`;
-                        let cElement = document.getElementById("Clientenombre");
-                        cElement.textContent = `- ${json.nombre} -`;
-                        let helement= document.getElementById("muestra")
-                        document.getElementById("enlace").href = otraurl;
+                      for (let element of json) {
+                       var otraurl="http://127.0.0.1:8000/appEmpresaDjango/cliente/"
+                      otraurl=otraurl+element.id
+                      var variable='<td class="comptab">'+element.id+'</td ><td class="comptab">'+element.nombre+'</td><td class="comptab"><a id="enlace" href='+otraurl+' class= "boton_borrar"><img src="{% static 'ojo.png' %}"></td>'
+                        document.getElementById("latabla").insertRow(-1).innerHTML =variable
+                        }
                     });
             }
+
 
             loadDatamas();
-            function loadDatamenos() {
-            SERVICE_URL="http://127.0.0.1:8000/appEmpresaDjango/clientes/"
-            otraurl="http://127.0.0.1:8000/appEmpresaDjango/cliente/"
-                posicion=posicion-1
-                if (posicion<=0){
-                posicion =1
-                }
-                SERVICE_URL=SERVICE_URL+posicion
-                otraurl=otraurl+posicion+"/"
 
-                fetch(SERVICE_URL)
-                    .then((response) => response.json())
-                    .then((json) => {
-                        let qElement = document.getElementById("Clienteid");
-                        qElement.textContent = `"${json.id}"`;
-                        let cElement = document.getElementById("Clientenombre");
-                        cElement.textContent = `- ${json.nombre} -`;
-                        let helement= document.getElementById("muestra")
-                        helement.textContent = "";
-                        document.getElementById("enlace").href = otraurl;
-                    });
-            }
-
-            loadDatamenos();
         </script>
         <div id = "page">
             <div id = "page_text">
                 <h2>CLIENTES</h2>
-                <div><center><h3 id="muestra">No hay clientes o no los has seleccionado mediante las flechas</h3></center></div>
             </div>
             <div id= "tabla">
-                <table class="tablapla">
+                <table id="latabla" class="tablapla">
                     <tr>
                         <th class="tittabla">ID</th>
                         <th class="tittabla">Nombre </th>
                         <th class="tittabla">Ver más</th>
                     </tr>
-                    <tr>
-                        <td class="comptab"id="Clienteid"></td>
-                        <td class="comptab"id="Clientenombre"></td>
-                        <td class="comptab"><a id="enlace" href="{" class= "boton_borrar">
-                            <img src="{% static 'ojo.png' %}"></a></td>
-                    </tr>
+
                 </table>
-                <div><center><button onclick="loadDatamas()">---></button></center></div>
-                <div><center><button onclick="loadDatamenos()"> <--- </button></center></div>
             </div>
             <div><center><a href="{% url 'creador_cliente' %}">Añadir un cliente</a></center></div>
         </div>

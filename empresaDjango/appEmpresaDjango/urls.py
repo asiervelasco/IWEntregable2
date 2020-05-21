@@ -34,7 +34,6 @@ urlpatterns = [
 
      path('email/',views.devolvermail, name='email'),
 
-     path('clientes/<int:id>', views.ClientesAPI.as_view(),name='clientesAPI'),
      path('clientes/', views.ClientesCreación.as_view(), name='clientescrear')
 
 ]

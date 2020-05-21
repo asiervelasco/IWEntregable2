@@ -9,17 +9,18 @@ from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
-class ClientesAPI(View):
-    def get(self,request,id):
-        lista=Cliente.objects.get(id=id)
-        return JsonResponse(model_to_dict(lista))
+
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ClientesCreación(View):
+    def get(self, request):
+        lista = Cliente.objects.all()
+        return JsonResponse(list(lista.values()), safe=False)
     def post(self, request):
-        cliente=Cliente()
-        print(request.POST['nombre'])
-        cliente.nombre=request.POST['nombre']
+        print(request.POST)
+        nombre = request.POST["nombre"]
+        cliente = Cliente()
+        cliente.nombre = nombre
         cliente.save()
         return JsonResponse(model_to_dict(cliente))
 
@@ -27,7 +28,7 @@ class ClientesCreación(View):
 
 
 
-
+#Funcion encargada de delvolver un email con los datos de los proyectos
 def devolvermail(request):
     emailrec=request.POST['email']
     listaproyectos = Proyecto.objects.order_by('id')
