@@ -15,6 +15,7 @@
             <div><center><button >Crear cliente</button></center></div>
             <div><center><a href="{% url 'listaclientes' %}">Volver a la lista de clientes</a></center></div>
         </form>
+        <div><center><p  id ="exito"></p></center></div>
     </div>
 </div>
 <script>
@@ -31,12 +32,10 @@
             })
             .then(response => response.json())
             .then(json => console.log(json))
+            var p=document.getElementById('exito')
+            var text = document.createTextNode("Se ha creado el cliente correctamente");
 
-        var para = document.createElement("p");
-    var node = document.createTextNode("Se ha añadido el cliente correctamente");
-    para.appendChild(node);
-    var element = document.getElementById("page_text");
-    element.appendChild(para);
+p.appendChild(text);
     }
 </script>
 {% endblock %}
