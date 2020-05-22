@@ -7,6 +7,10 @@
 
                 <h2>PROYECTO</h2>
 
+                <br>
+
+                Esta es la información del proyecto seleccionado.
+
                 <div id= "tabla">
 
                     <table class="tablapla">
@@ -46,6 +50,10 @@
                     <hr>
                     <hr>
 
+                    <br>
+
+                    Estas son las tareas del proyecto.
+
                     <table class="tablapla">
                         <tr>
                             <th class="tittabla">ID</th>
@@ -80,6 +88,7 @@
                         {%endif%}
                     {%endfor%}
                     </table>
+                    <div><center><a href="{% url 'creador_tarea' %}">Crear nueva tarea</a></center></div>
                     <div><center><a href="{% url 'listaproyectos' %}">Volver a la lista de proyectos</a></center></div>
                     <br>
                 </div>

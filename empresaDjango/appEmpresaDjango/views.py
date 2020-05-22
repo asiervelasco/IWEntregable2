@@ -11,6 +11,13 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 
+#Esta es nuestra API para interactuar con la lista de clientes
+class ClientesAPI(View):
+    def get(self,request,id):
+        lista=Cliente.objects.get(id=id)
+        return JsonResponse(model_to_dict(lista))
+
+
 @method_decorator(csrf_exempt, name='dispatch')
 class ClientesCreación(View):
     def get(self, request):
@@ -29,6 +36,8 @@ class ClientesCreación(View):
 
 
 #Funcion encargada de delvolver un email con los datos de los proyectos
+
+#Función con la que podemos enviar correos con los datos de los proyecto
 def devolvermail(request):
     emailrec=request.POST['email']
     listaproyectos = Proyecto.objects.order_by('id')
@@ -36,7 +45,7 @@ def devolvermail(request):
     tareas = Tarea.objects.all()
     for proyecto in listaproyectos:
         contenido=contenido+"Nombre del proyecto: "+proyecto.nombre + "\n"
-        contenido = contenido + "Empleados de el proyecto: "
+        contenido = contenido + "Empleados del proyecto: "
         empleados=proyecto.empleados.all()
         for empleado in empleados :
             contenido=contenido+empleado.nombre+" "+empleado.apellido+","
@@ -47,7 +56,7 @@ def devolvermail(request):
                 contenido=contenido+tarea.nombre+","
         contenido = contenido + "\n"
         contenido = contenido +"Descripción del proyecto: "+proyecto.descripcion + "\n"
-        contenido = contenido + "Nombre de el cliente: " + proyecto.cliente.nombre + "\n"
+        contenido = contenido + "Nombre del cliente: " + proyecto.cliente.nombre + "\n"
         contenido = contenido + "Fecha de inicio: " + str(proyecto.inicio) + "\n"
         contenido = contenido + "Fecha de fin: " + str(proyecto.fin) + "\n"
         contenido = contenido + "Presupuesto: " + proyecto.presupuesto + "\n"+"\n"+"\n"

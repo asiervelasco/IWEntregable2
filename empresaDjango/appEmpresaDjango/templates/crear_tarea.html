@@ -6,6 +6,9 @@
     <div id = "page_text">
         <form action="{% url 'crear_tarea' %}" method="post">
             {% csrf_token %}
+
+            <h2>NUEVA TAREA</h2>
+
             <div class="columna1">
                 <div id="formulario">
                     Nombre
