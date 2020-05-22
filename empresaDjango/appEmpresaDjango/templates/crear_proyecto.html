@@ -12,27 +12,27 @@
 
             <div class="columna1">
                 <div id="formulario">
-                    Nombre
+                    NOMBRE
                 </div>
                 <input class="formulario_input" type="text" name="nombre"><br>
                 <div id="formulario">
-                    Descripción
+                    DESCRIPCIÓN
                 </div>
                 <textarea class="formulario_input" type="text" name="descripcion"></textarea><br>
                 <div id="formulario">
-                    Inicio
+                    FECHA DE INICIO
                 </div>
                 <input class="formulario_input" type="date" name="inicio"><br>
                 <div id="formulario">
-                    Fin
+                    FECHA FIN
                 </div>
                 <input class="formulario_input" type="date" name="fin"><br>
                 <div id="formulario">
-                    Presupuesto
+                    PRESUPUESTO
                 </div>
                 <input class="formulario_input" type="number" name="presupuesto"><br>
                 <div id="formulario">
-                    Cliente
+                    CLIENTE
                 </div>
                 <select id="select_cliente" name="cliente" >
                     {% for a in listaclientes %}
@@ -40,7 +40,7 @@
                     {% endfor %}
                 </select>
                 <div id="formulario">
-                    Empleados que participan
+                    EMPLEADOS QUE PARTICIPAN
                 </div>
                 <select id="select_empleados" name="empleados" multiple required>
                     {% for emp in listaempleados %}

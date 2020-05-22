@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 
-#Esta es nuestra API para interactuar con la lista de clientes
+#Esta es nuestra API que vamos a utilizar para interactuar con la lista de clientes
 class ClientesAPI(View):
     def get(self,request,id):
         lista=Cliente.objects.get(id=id)
@@ -36,8 +36,6 @@ class ClientesCreación(View):
 
 
 #Funcion encargada de delvolver un email con los datos de los proyectos
-
-#Función con la que podemos enviar correos con los datos de los proyecto
 def devolvermail(request):
     emailrec=request.POST['email']
     listaproyectos = Proyecto.objects.order_by('id')

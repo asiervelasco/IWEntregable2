@@ -11,23 +11,23 @@
 
             <div class="columna1">
                 <div id="formulario">
-                    Nombre
+                    NOMBRE
                 </div>
                 <input class="formulario_input" type="text" name="nombre"><br>
                 <div id="formulario">
-                    Descripción
+                    DESCRIPCIÓN
                 </div>
                 <textarea class="formulario_input" type="text" name="descripcion"  rows="4" cols="50"></textarea><br>
                 <div id="formulario">
-                    Fecha de inicio
+                    FECHA DE INICIO
                 </div>
                 <input class="formulario_input" type="date"  name="inicio"><br>
                 <div id="formulario">
-                    Fecha fin
+                    FECHA FIN
                 </div>
                 <input class="formulario_input" type="date" name="fin"><br>
                 <div id="formulario">
-                    Responsable
+                    RESPONSABLE
                 </div>
                 <select id="select_responsable" name="responsable" >
                     {% for a in listaempleados %}
@@ -35,11 +35,11 @@
                     {% endfor %}
                 </select>
                 <div id="formulario">
-                    Nivel de prioridad
+                    NIVEL DE PRIORIDAD
                 </div>
                 <input class="formulario_input" type="text" name="prioridad"><br>
                 <div id="formulario">
-                    Estado de la tarea
+                    ESTADO DE LA TAREA
                 </div>
                 <select id="select_responsable" name="estado" >
                     <option value="Abierta">Abierta </option>
@@ -48,11 +48,11 @@
                     <option value="Finalizada">Finalizada </option>
                 </select>
                 <div id="formulario">
-                    Notas adicionales
+                    NOTAS ADICIONALES
                 </div>
                 <textarea class="formulario_input" type="text" name="notas" rows="4" cols="50"></textarea><br>
                 <div id="formulario">
-                    Proyecto
+                    PROYECTO
                 </div>
                 <select id="select_proyecto" name="proyecto" >
                     {% for a in listaproyectos %}
