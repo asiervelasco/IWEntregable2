@@ -10,7 +10,6 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 
-
 #Esta es nuestra API que vamos a utilizar para interactuar con la lista de clientes
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -25,14 +24,14 @@ class ClientesCreación(View):
         cliente.save()
         return JsonResponse(model_to_dict(cliente))
 
-@method_decorator(csrf_exempt, name='dispatch')
-class TareasEliminar(View):
-    def delete(self, request):
-        Tarea.objects.get(pk = request.DELETE['pk']).delete()
-        return HttpResponse()
-    def get(self, request, pk):
-        tarea = Tarea.objects.get(pk = pk)
-        return JsonResponse(model_to_dict(tarea))
+
+
+def marcartareacomoFinalizada(req):
+    tarea=Tarea.objects.get(pk=req.POST["id"])
+    tarea.estado="Finalizada"
+    tarea.save()
+    return JsonResponse(model_to_dict(tarea))
+
 
 
 

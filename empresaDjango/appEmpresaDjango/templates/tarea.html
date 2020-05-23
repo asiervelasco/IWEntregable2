@@ -27,24 +27,49 @@
                         <th class="tittabla">Editar</th>
                         <th class="tittabla">Eliminar</th>
                     </tr>
-                    <tr>
+                    <trd >
                         <td class="comptab">{{ tarea.id }}</td>
                         <td class="comptab">{{ tarea.nombre }}</td>
                         <td class="comptab">{{ tarea.descripcion }}</td>
                         <td class="comptab">{{ tarea.inicio }}</td>
                         <td class="comptab">{{ tarea.fin }}</td>
                         <td class="comptab">{{ tarea.responsable }}</td>
-                        <td class="comptab">{{ tarea.estado }}</td>
+                        <td id="estado" class="comptab">{{ tarea.estado }}<form id="formu">{% csrf_token %}<input class="formulario_input"  id="id" type="hidden" name="id" value="{{tarea.id}}">
+                        <button id="fin">FINALIZAR</button></form></td></td>
                         <td class="comptab">{{ tarea.notas }}</td>
                         <td class="comptab">{{ tarea.proyecto }}</td>
                         <td class="comptab"><a href="{% url 'actualizar_tarea' tarea.id %}" class= "boton_borrar">
                             <img src="{% static 'editar.jpg' %}"></a></td>
                         <td class="comptab"><a href="{% url 'eliminar_tarea' tarea.id %}" class= "boton_borrar">
                             <img src="{% static 'borrar.jpg' %}"></a></td>
-                    </tr>
+                    </trd>
                 </table>
                 <div><center><a href="{% url 'listatareas' %}">Volver a la lista de Tareas</a></center></div>
             </div>
         </div>
+ <script>
 
+     var elem = document.getElementById('fin');
+     elem.style.backgroundColor ="red";
+     elem.onclick = Crearobj;
+
+    document.getElementById("formu").addEventListener("submit", Crearobj)
+    function Crearobj(event) {
+    event.preventDefault()
+    var esto=new FormData(document.getElementById("formu"))
+     fetch('http://127.0.0.1:8000/appEmpresaDjango/marcarTarea/', {
+     method :'POST',
+
+        body :
+        esto
+            })
+            .then(response => response.json())
+            .then(json => console.log(json))
+            alert("se ha cambiado su estado a finalizado")
+
+	    document.getElementById("estado").innerHTML="Finalizada";
+    }
+
+
+ </script>
 {% endblock %}
