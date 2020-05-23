@@ -25,6 +25,14 @@ class ClientesCreación(View):
         cliente.save()
         return JsonResponse(model_to_dict(cliente))
 
+@method_decorator(csrf_exempt, name='dispatch')
+class TareasEliminar(View):
+    def delete(self, request):
+        Tarea.objects.get(pk = request.DELETE['pk']).delete()
+        return HttpResponse()
+    def get(self, request, pk):
+        tarea = Tarea.objects.get(pk = pk)
+        return JsonResponse(model_to_dict(tarea))
 
 
 

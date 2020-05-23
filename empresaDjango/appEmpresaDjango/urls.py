@@ -34,6 +34,7 @@ urlpatterns = [
 
      path('email/',views.devolvermail, name='email'),
 
-     path('clientes/', views.ClientesCreación.as_view(), name='clientescrear')
+     path('clientes/', views.ClientesCreación.as_view(), name='clientescrear'),
+     path('tareas/<int:pk>/', views.TareasEliminar.as_view(), name='tareaseliminar')
 
 ]

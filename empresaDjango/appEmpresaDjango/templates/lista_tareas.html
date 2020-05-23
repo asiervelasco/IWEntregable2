@@ -4,11 +4,10 @@
 {% block contenido %}
         <div id = "page">
             <div id = "page_text">
-
+                
               <h2>TAREAS</h2>
 
             </div>
-
             <div id= "tabla">
                 <table class="tablapla">
                     <tr>
@@ -17,6 +16,7 @@
                         <th class="tittabla">Fecha de inicio</th>
                         <th class="tittabla">Fecha fin</th>
                         <th class="tittabla">Ver más</th>
+                        <th class="tittabla">Finalizar</th>
                     </tr>
                     {% for a in lista_tareas %}
                         <tr>
@@ -26,8 +26,31 @@
                             <td class="comptab">{{ a.fin }}</td>
                             <td class="comptab"><a href="{% url 'tareaun' a.id %}" class= "boton_borrar">
                                 <img src="{% static 'ojo.png' %}"></a></td>
+                            <td class="comptab"><button id="fin{{a.id}}">FINALIZAR</button></td>
+                            
                         </tr>
+                        <script>
+                        
+                        var elem = document.getElementById('fin{{a.id}}');
+                        elem.style.backgroundColor ="red";
+                        elem.onclick = finalizar;
+                        
+                        function finalizar()
+                        {
+                            var id = "{{a.id}}"
+                            fetch('http://127.0.0.1:8000/appEmpresaDjango/tareas/' + id, {
+                            method: 'DELETE',
+                            pk:id
+                            })
+                            .then(res => res.text()) // or res.json()
+                            alert("La tarea {{ a.nombre }} del proyecto {{a.proyecto}} ha sido eliminada!");
+
+                        }
+
+                        
+                    </script>
                     {% endfor %}
+                    
                 </table>
             </div>
         </div>
