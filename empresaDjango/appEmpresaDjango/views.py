@@ -12,11 +12,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 #Esta es nuestra API que vamos a utilizar para interactuar con la lista de clientes
-class ClientesAPI(View):
-    def get(self,request,id):
-        lista=Cliente.objects.get(id=id)
-        return JsonResponse(model_to_dict(lista))
-
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ClientesCreación(View):
@@ -24,7 +19,6 @@ class ClientesCreación(View):
         lista = Cliente.objects.all()
         return JsonResponse(list(lista.values()), safe=False)
     def post(self, request):
-        print(request.POST)
         nombre = request.POST["nombre"]
         cliente = Cliente()
         cliente.nombre = nombre

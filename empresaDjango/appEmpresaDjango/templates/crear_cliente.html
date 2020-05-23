@@ -25,7 +25,6 @@
     document.getElementById("formu").addEventListener("submit", Crearobj)
     function Crearobj(event) {
     event.preventDefault()
-    var elnombre = document.getElementById('nombre').value;
     var esto=new FormData(document.getElementById("formu"))
      fetch('http://127.0.0.1:8000/appEmpresaDjango/clientes/', {
      method :'POST',
@@ -38,7 +37,7 @@
             var p=document.getElementById('exito')
             var text = document.createTextNode("Se ha creado el cliente correctamente");
 
-p.appendChild(text);
+    p.appendChild(text);
     }
 </script>
 {% endblock %}
